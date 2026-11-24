@@ -985,13 +985,9 @@ function carouselHtml(list){
   return `<div id="carousel" class="hide-scroll" style="display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:8px;margin:0 -4px">
     ${list.map(i=>`<button class="island-card scene-card ${i.id===S.selectedIslandId?'sel-island':''}" data-action="pick-island" data-id="${i.id}" style="scroll-snap-align:start">
       ${sceneArt(i.id)}
-      <div class="card-top"><span class="pill glasspill" style="color:var(--deep)">${i.hot}</span><span class="glass-strong" data-action="open-detail-id" data-id="${i.id}" title="先看看这座岛" style="display:grid;place-items:center;width:30px;height:30px;border-radius:50%;color:var(--deep)">${ICON.arrow}</span></div>
+      <div class="card-top"><span class="pill glasspill" style="color:var(--deep)">${i.hot}</span><span class="reco-detail" data-action="open-detail-id" data-id="${i.id}" title="先看看这座岛">了解详情 ${ICON.arrow}</span></div>
       <div class="card-bottom">
-        <p class="card-en">${i.en}</p>
-        <div style="display:flex;align-items:center;justify-content:space-between;gap:8px">
-          <h3 class="card-name">${i.name}</h3>
-          <button class="reco-detail" data-action="open-detail-id" data-id="${i.id}">了解详情 ${ICON.arrow}</button>
-        </div>
+        <p class="card-en">${i.en}</p><h3 class="card-name">${i.name}</h3>
         <div class="card-meta"><span>${DATA.levels[0].duration} · ${i.distance}</span><span class="card-price">¥${levelPrice(i.id,'taste')} 起</span></div>
       </div>
     </button>`).join('')}
