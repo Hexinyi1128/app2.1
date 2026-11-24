@@ -6,23 +6,23 @@
 <title>跳岛 · ISLAND HOP（可直接运行版）</title>
 <style>
 :root{
-  --primary:#6E96C2;--deep:#5580B0;--mist:#C6D8EA;--mistlight:#EAF1F8;
-  --page:#F7F9FB;--ink:#2A2D33;--muted:#9AA0A8;--line:#E8EDF2;
-  --okay:#A8D08D;--off:#D98880;
+  --primary:#71C9CE;--deep:#3E9BA2;--mist:#A6E3E9;--mistlight:#E3FDFD;
+  --page:#F2FDFD;--ink:#22545A;--muted:#6E9EA3;--line:#CBF1F5;
+  --okay:#A6E3E9;--off:#D98880;
 }
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 html,body{min-height:100%}
-body{margin:0;background:#E8EDF2;color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei","Segoe UI",sans-serif;-webkit-font-smoothing:antialiased}
+body{margin:0;background:#E3FDFD;color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei","Segoe UI",sans-serif;-webkit-font-smoothing:antialiased}
 button,input,textarea{font:inherit}
 button{color:inherit;-webkit-appearance:none;appearance:none;cursor:pointer}
-::selection{background:rgba(110,150,194,.28);color:inherit}
+::selection{background:rgba(113,201,206,.28);color:inherit}
 #app{position:relative;width:100%;max-width:100%;min-height:100vh;min-height:100dvh;margin:0 auto;overflow:hidden;background:var(--page)}
 @media(min-width:640px){#app{margin:0;min-height:100dvh;border-radius:0;box-shadow:none}}
 .screen{min-height:100%;padding-bottom:100px}
 .overlap{position:relative;z-index:6;margin-left:12px;margin-right:12px}
 
-#splash{position:fixed;inset:0;z-index:100;display:grid;place-items:center;padding:8px;background:#E8EDF2}
-#splash .splash-frame{position:relative;width:100%;height:100%;overflow:hidden;border-radius:28px;background:linear-gradient(150deg,#9FB9D8,#6E96C2);box-shadow:0 24px 60px rgba(42,45,51,.2);transition:opacity .35s ease,transform .35s ease}
+#splash{position:fixed;inset:0;z-index:100;display:grid;place-items:center;padding:8px;background:#E3FDFD}
+#splash .splash-frame{position:relative;width:100%;height:100%;overflow:hidden;border-radius:28px;background:linear-gradient(150deg,#A6E3E9,#71C9CE);box-shadow:0 24px 60px rgba(34,84,90,.2);transition:opacity .35s ease,transform .35s ease}
 #splash.out .splash-frame{opacity:0;transform:scale(1.04);pointer-events:none}
 #splash svg{width:100%;height:100%;display:block}
 #splash .stitle{position:absolute;top:18%;left:0;right:0;text-align:center;color:#fff;opacity:0;animation:fadeUp .7s .25s ease-out forwards}
@@ -34,7 +34,7 @@ button{color:inherit;-webkit-appearance:none;appearance:none;cursor:pointer}
 .hide-scroll{scrollbar-width:none;-ms-overflow-style:none}
 .hide-scroll::-webkit-scrollbar{display:none}
 
-.hdr{position:relative;overflow:hidden;margin:12px 12px 0;border:1px solid rgba(255,255,255,.55);border-radius:24px;background:linear-gradient(150deg,#9FB9D8,#C6D8EA);padding:28px 18px 30px}
+.hdr{position:relative;overflow:hidden;margin:12px 12px 0;border:1px solid rgba(255,255,255,.55);border-radius:24px;background:linear-gradient(150deg,#A6E3E9,#A6E3E9);padding:28px 18px 30px}
 .hdr.tight{padding-top:22px}
 .glass{background:rgba(255,255,255,.34);border:1px solid rgba(255,255,255,.58);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
 .glass-strong{background:rgba(255,255,255,.62);border:1px solid rgba(255,255,255,.78);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
@@ -42,7 +42,7 @@ button{color:inherit;-webkit-appearance:none;appearance:none;cursor:pointer}
 .hdr .deco i{position:absolute;display:block;border-radius:999px;background:rgba(255,255,255,.34);border:1px solid rgba(255,255,255,.58)}
 .hdr .content{position:relative;z-index:2}
 
-.hdr.home-header{margin:12px 12px 0;padding:24px 18px 30px;border:1px solid rgba(255,255,255,.55);border-radius:24px;background:linear-gradient(150deg,#9FB9D8,#BDD2E8);transition:transform .3s ease,opacity .3s ease}
+.hdr.home-header{margin:12px 12px 0;padding:24px 18px 30px;border:1px solid rgba(255,255,255,.55);border-radius:24px;background:linear-gradient(150deg,#A6E3E9,#CBF1F5);transition:transform .3s ease,opacity .3s ease}
 .hdr.home-header.collapsed{transform:translateY(calc(-100% - 16px));opacity:0;pointer-events:none}
 .home-overlap{margin-left:12px;margin-right:12px}
 .home-screen .hdr.home-header{margin:0;border-radius:0 0 24px 24px;padding:calc(24px + env(safe-area-inset-top,0px)) 12px 30px}
@@ -54,7 +54,7 @@ button{color:inherit;-webkit-appearance:none;appearance:none;cursor:pointer}
 .hdr-title{margin:16px 0 0;font-size:28px;line-height:1.25;letter-spacing:-.6px;color:var(--ink)}
 .hdr-desc{margin:8px 0 0;font-size:12px;line-height:1.6;color:var(--deep)}
 .hdr-search{display:flex;align-items:center;gap:10px;width:100%;height:42px;margin-top:18px;padding:0 14px;border:1px solid rgba(255,255,255,.9);border-radius:999px;background:rgba(255,255,255,.72);color:var(--deep);font-size:12px;text-align:left}
-.hdr-search .hint{flex:1;color:rgba(85,128,176,.82)}
+.hdr-search .hint{flex:1;color:rgba(113,201,206,.82)}
 .hdr-search .go{font-size:16px;font-weight:600}
 .srch-head{position:sticky;top:0;z-index:20;display:flex;align-items:center;gap:10px;padding:calc(env(safe-area-inset-top,0px) + 14px) 12px 12px 56px;background:rgba(255,255,255,.94);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
 .srch-back{display:grid;place-items:center;width:38px;height:38px;flex:none;border:0;border-radius:50%;background:var(--page);color:var(--ink)}
@@ -64,7 +64,7 @@ button{color:inherit;-webkit-appearance:none;appearance:none;cursor:pointer}
 .srch-clear{display:grid;place-items:center;width:22px;height:22px;flex:none;border:0;border-radius:50%;background:var(--mistlight);color:var(--deep);font-size:14px;line-height:1}
 .srch-label{margin:0;font-size:10px;font-weight:700;letter-spacing:.16em;color:var(--muted)}
 .srch-chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
-.header-mini{position:fixed;top:calc(env(safe-area-inset-top,0px) + 10px);left:50%;z-index:39;display:flex;align-items:center;gap:10px;width:min(calc(100% - 24px),351px);padding:8px 10px;border:1px solid rgba(255,255,255,.7);border-radius:22px;background:linear-gradient(150deg,#9FB9D8,#BDD2E8);box-shadow:0 12px 30px rgba(85,128,176,.3);opacity:0;pointer-events:none;transform:translate(-50%,-150%);transition:transform .28s ease,opacity .28s ease}
+.header-mini{position:fixed;top:calc(env(safe-area-inset-top,0px) + 10px);left:50%;z-index:39;display:flex;align-items:center;gap:10px;width:min(calc(100% - 24px),351px);padding:8px 10px;border:1px solid rgba(255,255,255,.7);border-radius:22px;background:linear-gradient(150deg,#A6E3E9,#CBF1F5);box-shadow:0 12px 30px rgba(113,201,206,.3);opacity:0;pointer-events:none;transform:translate(-50%,-150%);transition:transform .28s ease,opacity .28s ease}
 .header-mini.show{opacity:1;pointer-events:auto;transform:translate(-50%,0)}
 .mini-round{display:grid;place-items:center;width:36px;height:36px;flex:none;border:1px solid rgba(255,255,255,.75);border-radius:50%;background:rgba(255,255,255,.55);color:var(--deep)}
 .mini-main{flex:1;min-width:0;padding:0 2px;border:0;background:none;text-align:left;color:var(--ink)}
@@ -75,7 +75,7 @@ button{color:inherit;-webkit-appearance:none;appearance:none;cursor:pointer}
 .reco-title{margin:4px 0 0;font-size:17px;font-weight:700;line-height:1.3;color:var(--ink)}
 .reco-more{flex:none;padding:6px 0;border:0;background:none;color:var(--muted);font-size:11px}
 
-.card{background:#fff;border-radius:22px;box-shadow:0 10px 30px rgba(85,128,176,.08)}
+.card{background:#fff;border-radius:22px;box-shadow:0 10px 30px rgba(113,201,206,.08)}
 .card.click{cursor:pointer;transition:transform .15s}
 .card.click:active{transform:scale(.99)}
 .mt-3{margin-top:12px}.mt-4{margin-top:16px}.mt-5{margin-top:20px}.mt-6{margin-top:24px}.mt-7{margin-top:28px}
@@ -85,11 +85,11 @@ button{color:inherit;-webkit-appearance:none;appearance:none;cursor:pointer}
 .btn:active{transform:scale(.98)}
 .btn[disabled],.btn.disabled{opacity:.4;pointer-events:none}
 .btn .arrow{display:grid;place-items:center;width:40px;height:40px;flex:none;border-radius:50%}
-.btn.dark{background:var(--ink);color:#fff;box-shadow:0 10px 30px rgba(42,45,51,.16)}
+.btn.dark{background:var(--ink);color:#fff;box-shadow:0 10px 30px rgba(34,84,90,.16)}
 .btn.dark .arrow{background:#fff;color:var(--ink)}
-.btn.deep{background:var(--deep);color:#fff;box-shadow:0 10px 24px rgba(85,128,176,.26)}
+.btn.deep{background:var(--deep);color:#fff;box-shadow:0 10px 24px rgba(113,201,206,.26)}
 .btn.deep .arrow{background:#fff;color:var(--deep)}
-.btn.light{background:#fff;color:var(--ink);box-shadow:0 10px 30px rgba(85,128,176,.08)}
+.btn.light{background:#fff;color:var(--ink);box-shadow:0 10px 30px rgba(113,201,206,.08)}
 .btn.light .arrow{background:var(--ink);color:#fff}
 .btn.compact{height:36px;padding-left:14px;font-size:11px}
 .btn.compact .arrow{width:28px;height:28px}
@@ -100,15 +100,15 @@ button{color:inherit;-webkit-appearance:none;appearance:none;cursor:pointer}
 .pill.mist{background:rgba(198,216,234,.7);color:var(--deep)}
 .pill.dark{background:var(--ink);color:#fff}
 .pill.green{background:rgba(168,208,141,.25);color:#4F7B45}
-.pill.red{background:rgba(217,136,128,.2);color:#B05D56}
+.pill.red{background:rgba(95,185,191,.2);color:#B05D56}
 .pill.outline{background:#fff;border:1px solid var(--line);color:var(--muted)}
 .pill.glasspill{background:rgba(255,255,255,.5);border:1px solid rgba(255,255,255,.7);color:var(--deep)}
 
-.ring{position:relative;display:grid;place-items:center;flex:none;border-radius:50%;border:1px solid rgba(110,150,194,.35);background:rgba(255,255,255,.6);color:var(--deep)}
+.ring{position:relative;display:grid;place-items:center;flex:none;border-radius:50%;border:1px solid rgba(113,201,206,.35);background:rgba(255,255,255,.6);color:var(--deep)}
 .ring::after{content:"";position:absolute;inset:5px;border-radius:50%;border:1px solid currentColor;opacity:.22}
 .ring span{font-weight:700;letter-spacing:.08em;line-height:1}
-.mentor-avatar{display:block;flex:none;object-fit:cover;border-radius:50%;border:1px solid rgba(110,150,194,.35);background:#EAF1F8}
-.portrait-stage{position:relative;border-radius:18px;overflow:hidden;background:#DCEAF7}
+.mentor-avatar{display:block;flex:none;object-fit:cover;border-radius:50%;border:1px solid rgba(113,201,206,.35);background:#E3FDFD}
+.portrait-stage{position:relative;border-radius:18px;overflow:hidden;background:#CBF1F5}
 .portrait-stage img{display:block;width:100%;height:auto}
 .look-strip{display:flex;gap:9px;overflow-x:auto;padding:4px 2px 8px;-webkit-overflow-scrolling:touch}
 .look-strip::-webkit-scrollbar{display:none}
@@ -122,15 +122,15 @@ button{color:inherit;-webkit-appearance:none;appearance:none;cursor:pointer}
 .interest-tile{height:72px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;border:1px solid var(--line);border-radius:16px;background:#fff;color:var(--ink);transition:background .18s,border-color .18s,transform .18s}
 .interest-tile:active{transform:scale(.97)}
 .interest-tile.on{background:var(--mistlight);border-color:var(--mist);color:var(--deep)}
-.interest-icon{display:grid;place-items:center;width:36px;height:36px;flex:none;border-radius:50%;border:1px solid rgba(110,150,194,.22);background:linear-gradient(145deg,#fff,#EAF1F8);color:var(--deep);box-shadow:0 5px 12px rgba(85,128,176,.1),inset 0 0 0 3px rgba(255,255,255,.8)}
+.interest-icon{display:grid;place-items:center;width:36px;height:36px;flex:none;border-radius:50%;border:1px solid rgba(113,201,206,.22);background:linear-gradient(145deg,#fff,#E3FDFD);color:var(--deep);box-shadow:0 5px 12px rgba(113,201,206,.1),inset 0 0 0 3px rgba(255,255,255,.8)}
 .interest-icon svg{width:18px;height:18px}
-.interest-tile.on .interest-icon{background:var(--deep);border-color:var(--deep);color:#fff;box-shadow:0 6px 14px rgba(85,128,176,.3)}
+.interest-tile.on .interest-icon{background:var(--deep);border-color:var(--deep);color:#fff;box-shadow:0 6px 14px rgba(113,201,206,.3)}
 .interest-label{font-size:11px;font-weight:600;line-height:1}
 
-.login-hero{position:relative;overflow:hidden;margin:0 12px;padding:30px 20px 42px;border-radius:26px;background:linear-gradient(150deg,#9FB9D8,#C6D8EA)}
+.login-hero{position:relative;overflow:hidden;margin:0 12px;padding:30px 20px 42px;border-radius:26px;background:linear-gradient(150deg,#A6E3E9,#A6E3E9)}
 .login-hero::after{content:"";position:absolute;right:-48px;top:-56px;width:184px;height:184px;border-radius:50%;background:rgba(255,255,255,.26)}
 .login-hero::before{content:"";position:absolute;left:-34px;bottom:-62px;width:128px;height:128px;border-radius:50%;background:rgba(255,255,255,.2)}
-.login-card{position:relative;z-index:2;margin:-24px 12px 0;padding:24px 20px;border-radius:24px;background:#fff;box-shadow:0 16px 40px rgba(85,128,176,.13)}
+.login-card{position:relative;z-index:2;margin:-24px 12px 0;padding:24px 20px;border-radius:24px;background:#fff;box-shadow:0 16px 40px rgba(113,201,206,.13)}
 .login-field{display:flex;align-items:center;gap:10px;height:48px;margin-top:12px;padding:0 14px;border:1px solid var(--line);border-radius:16px;background:var(--page)}
 .login-field svg{width:17px;height:17px;flex:none;color:var(--deep)}
 .login-field input{flex:1;min-width:0;border:0;outline:0;background:transparent;font-size:13px;color:var(--ink)}
@@ -138,7 +138,7 @@ button{color:inherit;-webkit-appearance:none;appearance:none;cursor:pointer}
 .login-divider{display:flex;align-items:center;gap:10px;margin:24px 0 14px;color:var(--muted);font-size:10px;letter-spacing:.12em}
 .login-divider::before,.login-divider::after{content:"";flex:1;height:1px;background:var(--line)}
 
-.store-hero{position:relative;height:230px;margin:16px 16px 0;overflow:hidden;border-radius:24px;background-size:cover;background-repeat:no-repeat;box-shadow:0 10px 30px rgba(85,128,176,.12)}
+.store-hero{position:relative;height:230px;margin:16px 16px 0;overflow:hidden;border-radius:24px;background-size:cover;background-repeat:no-repeat;box-shadow:0 10px 30px rgba(113,201,206,.12)}
 .store-hero-shade{position:absolute;inset:0;pointer-events:none;background:linear-gradient(180deg,rgba(20,30,45,.06),rgba(20,30,45,.6))}
 .store-hero-copy{position:absolute;left:20px;right:20px;bottom:24px;color:#fff;pointer-events:none}
 .store-hero-copy p{margin:0}
@@ -157,16 +157,16 @@ button{color:inherit;-webkit-appearance:none;appearance:none;cursor:pointer}
 
 .nav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);z-index:40;width:100%;max-width:100%;padding:0 16px 16px;pointer-events:none}
 @media(min-width:640px){.nav{bottom:0}}
-.nav-inner{pointer-events:auto;display:flex;align-items:center;justify-content:space-between;gap:2px;width:100%;max-width:420px;margin:0 auto;padding:6px 8px;border-radius:999px;background:rgba(255,255,255,.88);box-shadow:0 10px 28px rgba(42,45,51,.18);backdrop-filter:blur(14px)}
+.nav-inner{pointer-events:auto;display:flex;align-items:center;justify-content:space-between;gap:2px;width:100%;max-width:420px;margin:0 auto;padding:6px 8px;border-radius:999px;background:rgba(255,255,255,.88);box-shadow:0 10px 28px rgba(34,84,90,.18);backdrop-filter:blur(14px)}
 .tab{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;width:52px;height:50px;flex:none;border:0;border-radius:999px;background:#fff;color:var(--muted);font-size:12px;font-weight:600}
 .tab svg{width:18px;height:18px}
 .tab-label{font-size:9px;line-height:1;letter-spacing:.02em}
-.tab.active{background:var(--ink);color:#fff;box-shadow:0 8px 20px rgba(42,45,51,.16)}
+.tab.active{background:var(--ink);color:#fff;box-shadow:0 8px 20px rgba(34,84,90,.16)}
 .plus-wrap{display:flex;flex-direction:column;align-items:center;gap:4px;flex:none;margin-top:-18px;padding:0;border:0;background:none;color:var(--primary)}
-.plus{display:grid;place-items:center;width:48px;height:48px;border:0;border-radius:50%;background:var(--primary);color:#fff;box-shadow:0 8px 18px rgba(85,128,176,.4)}
+.plus{display:grid;place-items:center;width:48px;height:48px;border:0;border-radius:50%;background:var(--primary);color:#fff;box-shadow:0 8px 18px rgba(113,201,206,.4)}
 .plus-wrap svg{width:24px;height:24px}
 .plus-label{font-size:9px;line-height:1;color:var(--primary);font-weight:600}
-.float-back{position:fixed;top:calc(env(safe-area-inset-top,0px) + 12px);left:50%;z-index:46;display:grid;place-items:center;width:38px;height:38px;transform:translateX(calc(-1 * min(50vw, 187.5px) + 12px));border:1px solid rgba(255,255,255,.9);border-radius:50%;background:rgba(255,255,255,.94);color:var(--ink);box-shadow:0 8px 22px rgba(42,45,51,.18);backdrop-filter:blur(10px)}
+.float-back{position:fixed;top:calc(env(safe-area-inset-top,0px) + 12px);left:50%;z-index:46;display:grid;place-items:center;width:38px;height:38px;transform:translateX(calc(-1 * min(50vw, 187.5px) + 12px));border:1px solid rgba(255,255,255,.9);border-radius:50%;background:rgba(255,255,255,.94);color:var(--ink);box-shadow:0 8px 22px rgba(34,84,90,.18);backdrop-filter:blur(10px)}
 .float-back svg{width:19px;height:19px}
 .section-anchor{scroll-margin-top:76px}
 
@@ -176,24 +176,24 @@ button{color:inherit;-webkit-appearance:none;appearance:none;cursor:pointer}
 .scene-photo{position:absolute;inset:0;background-size:cover;background-repeat:no-repeat;filter:saturate(.92)}
 .scene-glass{position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse at 50% 46%,rgba(255,255,255,0) 32%,rgba(255,255,255,.24) 72%,rgba(255,255,255,.68) 100%)}
 .scene-glass::before{content:"";position:absolute;inset:0;backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);mask-image:radial-gradient(ellipse at 50% 46%,transparent 36%,#000 94%);-webkit-mask-image:radial-gradient(ellipse at 50% 46%,transparent 36%,#000 94%)}
-.scene-card{position:relative;overflow:hidden;background:#DCE7F2}
+.scene-card{position:relative;overflow:hidden;background:#CBF1F5}
 .scene-card .ring{background:rgba(255,255,255,.82);backdrop-filter:blur(6px)}
 
 .unlock-node{position:absolute;transform:translate(-50%,-50%);display:grid;place-items:center;gap:5px;border:0;background:none;padding:0}
-.unlock-node .orb{position:relative;display:grid;place-items:center;width:74px;height:42px;padding-bottom:5px;border-radius:74px 74px 0 0;border:1px solid rgba(255,255,255,.9);background:rgba(255,255,255,.95);color:var(--deep);box-shadow:0 8px 18px rgba(42,45,51,.14);font-size:17px;font-weight:700}
-.unlock-node .orb::after{content:"";position:absolute;top:-7px;left:50%;transform:translateX(-50%);width:8px;height:8px;border-radius:50%;background:#2A2D33}
-.unlock-node.locked .orb{background:rgba(255,255,255,.4);color:rgba(85,128,176,.55);border-color:rgba(255,255,255,.5);box-shadow:none}
+.unlock-node .orb{position:relative;display:grid;place-items:center;width:74px;height:42px;padding-bottom:5px;border-radius:74px 74px 0 0;border:1px solid rgba(255,255,255,.9);background:rgba(255,255,255,.95);color:var(--deep);box-shadow:0 8px 18px rgba(34,84,90,.14);font-size:17px;font-weight:700}
+.unlock-node .orb::after{content:"";position:absolute;top:-7px;left:50%;transform:translateX(-50%);width:8px;height:8px;border-radius:50%;background:#22545A}
+.unlock-node.locked .orb{background:rgba(255,255,255,.4);color:rgba(113,201,206,.55);border-color:rgba(255,255,255,.5);box-shadow:none}
 .unlock-node.locked .orb::after{opacity:.25}
 .unlock-node small{font-size:10px;font-weight:600;color:var(--deep);text-shadow:0 1px 2px rgba(255,255,255,.9)}
-.unlock-node.locked small{color:rgba(85,128,176,.6)}
+.unlock-node.locked small{color:rgba(113,201,206,.6)}
 
-.toast{position:fixed;top:16px;left:50%;transform:translateX(-50%);z-index:60;display:flex;align-items:center;gap:10px;width:310px;padding:12px 14px;border-radius:18px;background:rgba(42,45,51,.95);color:#fff;box-shadow:0 12px 34px rgba(42,45,51,.2);font-size:12px;line-height:1.5;animation:toastIn .24s ease-out}
+.toast{position:fixed;top:16px;left:50%;transform:translateX(-50%);z-index:60;display:flex;align-items:center;gap:10px;width:310px;padding:12px 14px;border-radius:18px;background:rgba(34,84,90,.95);color:#fff;box-shadow:0 12px 34px rgba(34,84,90,.2);font-size:12px;line-height:1.5;animation:toastIn .24s ease-out}
 @media(min-width:640px){.toast{top:36px}}
 .toast .tick{display:grid;place-items:center;width:24px;height:24px;flex:none;border-radius:50%;background:var(--okay);color:var(--ink)}
 @keyframes toastIn{from{opacity:0;transform:translate(-50%,-12px)}to{opacity:1;transform:translate(-50%,0)}}
 
-.sheet-mask{position:fixed;inset:0;z-index:50;background:rgba(42,45,51,.25);backdrop-filter:blur(2px)}
-.sheet{position:fixed;bottom:0;left:50%;transform:translateX(-50%);z-index:51;width:100%;max-width:520px;padding:20px 20px 28px;border-radius:26px 26px 0 0;background:#fff;box-shadow:0 12px 34px rgba(42,45,51,.18);animation:rise .3s ease-out}
+.sheet-mask{position:fixed;inset:0;z-index:50;background:rgba(34,84,90,.25);backdrop-filter:blur(2px)}
+.sheet{position:fixed;bottom:0;left:50%;transform:translateX(-50%);z-index:51;width:100%;max-width:520px;padding:20px 20px 28px;border-radius:26px 26px 0 0;background:#fff;box-shadow:0 12px 34px rgba(34,84,90,.18);animation:rise .3s ease-out}
 @media(min-width:640px){.sheet{bottom:0;border-radius:26px 26px 0 0}}
 @keyframes rise{from{opacity:0;transform:translate(-50%,10px)}to{opacity:1;transform:translate(-50%,0)}}
 .sheet .handle{width:40px;height:4px;margin:0 auto 18px;border-radius:99px;background:var(--line)}
@@ -201,67 +201,67 @@ button{color:inherit;-webkit-appearance:none;appearance:none;cursor:pointer}
 .sheet-item strong{display:block;font-size:13px}
 .sheet-item small{display:block;margin-top:3px;font-size:11px;color:var(--muted)}
 
-.map{position:relative;height:360px;overflow:hidden;background-color:#E4EBF3;background-image:linear-gradient(0deg,rgba(255,255,255,.72) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.72) 1px,transparent 1px);background-size:46px 46px}
+.map{position:relative;height:360px;overflow:hidden;background-color:#E3FDFD;background-image:linear-gradient(0deg,rgba(255,255,255,.72) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.72) 1px,transparent 1px);background-size:46px 46px}
 .pin{position:absolute;transform:translate(-50%,-50%);padding:0;border:0;background:none}
-.pin .pin-orb{display:grid;place-items:center;width:38px;height:38px;border:1px solid rgba(255,255,255,.9);border-radius:50%;background:#fff;color:var(--deep);font-size:15px;font-weight:700;box-shadow:0 8px 20px rgba(85,128,176,.16);transition:transform .2s}
+.pin .pin-orb{display:grid;place-items:center;width:38px;height:38px;border:1px solid rgba(255,255,255,.9);border-radius:50%;background:#fff;color:var(--deep);font-size:15px;font-weight:700;box-shadow:0 8px 20px rgba(113,201,206,.16);transition:transform .2s}
 .pin.active .pin-orb{background:var(--deep);color:#fff;transform:scale(1.08)}
 .pin.active::after{content:"";position:absolute;left:50%;bottom:-4px;width:8px;height:8px;transform:translateX(-50%) rotate(45deg);background:var(--deep)}
 .ping{position:absolute;left:46.32%;top:47.79%;z-index:3;width:14px;height:14px;transform:translate(-50%,-50%)}
-.ping::before{content:"";position:absolute;inset:-22px;border-radius:50%;background:rgba(110,150,194,.14)}
-.ping::after{content:"";position:absolute;inset:0;border:3px solid #fff;border-radius:50%;background:var(--deep);box-shadow:0 2px 6px rgba(42,45,51,.2)}
+.ping::before{content:"";position:absolute;inset:-22px;border-radius:50%;background:rgba(113,201,206,.14)}
+.ping::after{content:"";position:absolute;inset:0;border:3px solid #fff;border-radius:50%;background:var(--deep);box-shadow:0 2px 6px rgba(34,84,90,.2)}
 @keyframes ping{0%{transform:scale(.65);opacity:.55}80%,100%{transform:scale(1.8);opacity:0}}
 
-.island-world{position:relative;height:520px;overflow:hidden;border-radius:18px;background:linear-gradient(165deg,#C7DCEF,#E6F0F8)}
+.island-world{position:relative;height:520px;overflow:hidden;border-radius:18px;background:linear-gradient(165deg,#A6E3E9,#E3FDFD)}
 .island-world::before{content:"";position:absolute;inset:0;background-image:radial-gradient(ellipse at 18% 24%,rgba(255,255,255,.5) 0 7%,transparent 8%),radial-gradient(ellipse at 72% 68%,rgba(255,255,255,.42) 0 9%,transparent 10%),radial-gradient(ellipse at 46% 88%,rgba(255,255,255,.38) 0 6%,transparent 7%)}
 .island-art{position:absolute;transform:translate(-50%,-50%);display:grid;place-items:center;gap:0;padding:0;border:0;background:none;color:var(--deep);font:inherit;width:170px;transition:transform .25s ease}
 .island-art:hover{transform:translate(-50%,-54%) scale(1.04)}
-.island-art svg{display:block;width:170px;height:118px;filter:drop-shadow(0 8px 10px rgba(85,128,176,.2))}
-.island-art .nm{margin-top:-6px;padding:4px 10px;border-radius:99px;background:rgba(255,255,255,.9);font-size:10px;font-weight:700;box-shadow:0 4px 10px rgba(85,128,176,.16)}
+.island-art svg{display:block;width:170px;height:118px;filter:drop-shadow(0 8px 10px rgba(113,201,206,.2))}
+.island-art .nm{margin-top:-6px;padding:4px 10px;border-radius:99px;background:rgba(255,255,255,.9);font-size:10px;font-weight:700;box-shadow:0 4px 10px rgba(113,201,206,.16)}
 .island-empty{position:absolute;inset:0;display:grid;place-content:center;gap:8px;text-align:center;padding:0 30px;color:var(--deep)}
 .island-empty b{font-size:15px}
 .island-empty span{font-size:11px;line-height:1.7;color:var(--muted)}
-.island-map{position:relative;height:300px;overflow:hidden;border-radius:18px;background:linear-gradient(160deg,#BFD6EA,#DCEAF5)}
+.island-map{position:relative;height:300px;overflow:hidden;border-radius:18px;background:linear-gradient(160deg,#CBF1F5,#CBF1F5)}
 .island-map>svg{position:absolute;inset:0;width:100%;height:100%}
 .island-pin{position:absolute;transform:translate(-50%,-50%);display:grid;place-items:center;gap:2px;padding:0;border:0;background:none;color:var(--deep)}
-.island-pin .day{font-size:9px;font-weight:800;letter-spacing:.1em;color:rgba(85,128,176,.8)}
-.island-pin .orb{display:grid;place-items:center;width:42px;height:42px;border:2px solid rgba(255,255,255,.95);border-radius:50%;background:rgba(255,255,255,.86);box-shadow:0 8px 16px rgba(42,45,51,.16);font-size:15px;font-weight:800}
+.island-pin .day{font-size:9px;font-weight:800;letter-spacing:.1em;color:rgba(113,201,206,.8)}
+.island-pin .orb{display:grid;place-items:center;width:42px;height:42px;border:2px solid rgba(255,255,255,.95);border-radius:50%;background:rgba(255,255,255,.86);box-shadow:0 8px 16px rgba(34,84,90,.16);font-size:15px;font-weight:800}
 .island-pin .nm{font-size:10px;font-weight:700;white-space:nowrap;text-shadow:0 1px 2px #fff}
 .island-pin.locked{opacity:.55;filter:grayscale(.5)}
-.map-dark{position:relative;height:360px;overflow:hidden;background:linear-gradient(155deg,#D8E7F4,#EAF2F8);touch-action:none;user-select:none}
+.map-dark{position:relative;height:360px;overflow:hidden;background:linear-gradient(155deg,#A6E3E9,#E3FDFD);touch-action:none;user-select:none}
 .map-full .map-dark{height:calc(100vh - 12px)}
-.map-dark::before{content:"";position:absolute;inset:-20%;background-image:linear-gradient(rgba(85,128,176,.07) 1px,transparent 1px),linear-gradient(90deg,rgba(85,128,176,.07) 1px,transparent 1px);background-size:38px 38px;transform:rotate(-9deg)}
+.map-dark::before{content:"";position:absolute;inset:-20%;background-image:linear-gradient(rgba(113,201,206,.07) 1px,transparent 1px),linear-gradient(90deg,rgba(113,201,206,.07) 1px,transparent 1px);background-size:38px 38px;transform:rotate(-9deg)}
 .map-canvas{position:absolute;inset:-18%;width:136%;height:136%;touch-action:none;will-change:transform;transform-origin:center center}
 .real-map{position:absolute;inset:0;transform-origin:center center}
-.map-compass{position:absolute;font-size:10px;font-weight:800;color:rgba(85,128,176,.5);letter-spacing:.08em;transform:translate(-50%,-50%)}
-.map-credit{position:absolute;right:14px;bottom:8px;z-index:2;font-size:8px;color:rgba(85,128,176,.6)}
-.map-road{position:absolute;border-radius:99px;background:rgba(255,255,255,.92);box-shadow:0 0 0 1px rgba(110,150,194,.06)}
-.map-building{position:absolute;border:1px solid rgba(110,150,194,.2);border-radius:8px;background:linear-gradient(150deg,rgba(255,255,255,.9),rgba(224,237,248,.78));box-shadow:0 5px 12px rgba(85,128,176,.08),inset 0 0 0 3px rgba(255,255,255,.45)}
-.map-building::after{content:"";position:absolute;inset:5px;border:1px solid rgba(110,150,194,.12);border-radius:4px}
+.map-compass{position:absolute;font-size:10px;font-weight:800;color:rgba(113,201,206,.5);letter-spacing:.08em;transform:translate(-50%,-50%)}
+.map-credit{position:absolute;right:14px;bottom:8px;z-index:2;font-size:8px;color:rgba(113,201,206,.6)}
+.map-road{position:absolute;border-radius:99px;background:rgba(255,255,255,.92);box-shadow:0 0 0 1px rgba(113,201,206,.06)}
+.map-building{position:absolute;border:1px solid rgba(113,201,206,.2);border-radius:8px;background:linear-gradient(150deg,rgba(255,255,255,.9),rgba(224,237,248,.78));box-shadow:0 5px 12px rgba(113,201,206,.08),inset 0 0 0 3px rgba(255,255,255,.45)}
+.map-building::after{content:"";position:absolute;inset:5px;border:1px solid rgba(113,201,206,.12);border-radius:4px}
 .map-building.park{border-radius:45% 55% 48% 52%;background:rgba(186,218,190,.5)}
 .map-building.water{border-radius:48% 52% 42% 58%;background:rgba(146,195,232,.42)}
-.map-poi{position:absolute;font-size:9px;font-weight:700;color:rgba(85,128,176,.62);white-space:nowrap}
-.map-label{position:absolute;font-size:10px;font-weight:700;letter-spacing:.16em;color:rgba(85,128,176,.55)}
+.map-poi{position:absolute;font-size:9px;font-weight:700;color:rgba(113,201,206,.62);white-space:nowrap}
+.map-label{position:absolute;font-size:10px;font-weight:700;letter-spacing:.16em;color:rgba(113,201,206,.55)}
 .map-ctrl{position:absolute;right:14px;top:14px;z-index:4;display:grid;gap:8px}
-.map-reset,.map-zoom{display:grid;place-items:center;width:34px;height:34px;border:1px solid rgba(255,255,255,.9);border-radius:50%;background:rgba(255,255,255,.9);color:var(--deep);box-shadow:0 4px 12px rgba(85,128,176,.16);backdrop-filter:blur(8px);font-size:17px;font-weight:700;line-height:1}
-.map-head{max-height:280px;overflow:hidden;margin:12px 12px 0;padding:28px 18px 22px;border:1px solid var(--line);border-radius:24px;background:#fff;box-shadow:0 8px 24px rgba(85,128,176,.08);transition:max-height .3s ease,padding .3s ease,margin .3s ease,opacity .25s ease}
+.map-reset,.map-zoom{display:grid;place-items:center;width:34px;height:34px;border:1px solid rgba(255,255,255,.9);border-radius:50%;background:rgba(255,255,255,.9);color:var(--deep);box-shadow:0 4px 12px rgba(113,201,206,.16);backdrop-filter:blur(8px);font-size:17px;font-weight:700;line-height:1}
+.map-head{max-height:280px;overflow:hidden;margin:12px 12px 0;padding:28px 18px 22px;border:1px solid var(--line);border-radius:24px;background:#fff;box-shadow:0 8px 24px rgba(113,201,206,.08);transition:max-height .3s ease,padding .3s ease,margin .3s ease,opacity .25s ease}
 .map-head.collapsed{max-height:0;padding-top:0;padding-bottom:0;margin-top:0;margin-bottom:0;opacity:0;pointer-events:none}
-.section-mini{position:fixed;top:calc(env(safe-area-inset-top,0px) + 10px);left:50%;transform:translate(-50%,-150%);z-index:39;display:flex;align-items:center;gap:10px;width:min(calc(100% - 24px),351px);padding:10px 14px;border:1px solid rgba(255,255,255,.85);border-radius:22px;background:rgba(255,255,255,.94);box-shadow:0 10px 28px rgba(85,128,176,.2);backdrop-filter:blur(12px);text-align:left;font:inherit;opacity:0;pointer-events:none;transition:transform .28s ease,opacity .28s ease}
+.section-mini{position:fixed;top:calc(env(safe-area-inset-top,0px) + 10px);left:50%;transform:translate(-50%,-150%);z-index:39;display:flex;align-items:center;gap:10px;width:min(calc(100% - 24px),351px);padding:10px 14px;border:1px solid rgba(255,255,255,.85);border-radius:22px;background:rgba(255,255,255,.94);box-shadow:0 10px 28px rgba(113,201,206,.2);backdrop-filter:blur(12px);text-align:left;font:inherit;opacity:0;pointer-events:none;transition:transform .28s ease,opacity .28s ease}
 .section-mini.show{transform:translate(-50%,0);opacity:1;pointer-events:auto}
 .section-mini .t{flex:1;font-size:13px;font-weight:700;color:var(--ink)}
 .section-mini .s{font-size:10px;color:var(--muted);white-space:nowrap;max-width:46%;overflow:hidden;text-overflow:ellipsis}
 #unlockHead{padding-bottom:56px;max-height:420px;transition:max-height .3s ease,padding .3s ease,margin .3s ease,opacity .25s ease}
 #unlockHead.collapsed{max-height:0;padding-top:0;padding-bottom:0;margin-top:0;opacity:0;pointer-events:none}
 .photo-pin{position:absolute;z-index:3;transform:translate(-50%,-50%);display:flex;flex-direction:column;align-items:center;gap:4px;padding:0;border:0;background:none}
-.photo-ring{display:block;width:52px;height:52px;padding:3px;border-radius:50%;background:#fff;box-shadow:0 8px 18px rgba(85,128,176,.22)}
+.photo-ring{display:block;width:52px;height:52px;padding:3px;border-radius:50%;background:#fff;box-shadow:0 8px 18px rgba(113,201,206,.22)}
 .photo-ring img{display:block;width:100%;height:100%;object-fit:cover;border-radius:50%;filter:saturate(.62) brightness(1.12) contrast(.92)}
-.photo-tag{padding:3px 9px;border-radius:8px;background:#fff;color:var(--ink);font-size:10px;font-weight:800;white-space:nowrap;box-shadow:0 4px 10px rgba(85,128,176,.18);transform:rotate(-3deg)}
+.photo-tag{padding:3px 9px;border-radius:8px;background:#fff;color:var(--ink);font-size:10px;font-weight:800;white-space:nowrap;box-shadow:0 4px 10px rgba(113,201,206,.18);transform:rotate(-3deg)}
 .photo-pin.active .photo-ring{padding:3px;background:var(--primary)}
 .photo-pin.active .photo-tag{background:var(--primary);color:#fff}
 .stores-section{max-height:1400px;overflow:hidden;padding-top:20px;opacity:1;transition:max-height .35s ease,padding .3s ease,opacity .25s ease}
 .stores-section.collapsed{max-height:0;padding-top:0;opacity:0;pointer-events:none}
 
 .slider{-webkit-appearance:none;appearance:none;width:100%;height:6px;border-radius:99px;background:linear-gradient(90deg,var(--primary) var(--p,50%),var(--line) var(--p,50%));outline:none}
-.slider::-webkit-slider-thumb{-webkit-appearance:none;width:22px;height:22px;border:5px solid var(--deep);border-radius:50%;background:#fff;box-shadow:0 2px 8px rgba(42,45,51,.18)}
+.slider::-webkit-slider-thumb{-webkit-appearance:none;width:22px;height:22px;border:5px solid var(--deep);border-radius:50%;background:#fff;box-shadow:0 2px 8px rgba(34,84,90,.18)}
 .slider::-moz-range-thumb{width:14px;height:14px;border:5px solid var(--deep);border-radius:50%;background:#fff}
 textarea.field{width:100%;resize:none;padding:14px;border:0;border-radius:18px;background:var(--page);font-size:12px;line-height:1.7;color:var(--ink);outline:none}
 textarea.field:focus{box-shadow:0 0 0 1px var(--primary)}
@@ -272,7 +272,7 @@ input.text::placeholder{color:var(--mist)}
 .chip{padding:9px 13px;border:1px solid var(--line);border-radius:999px;background:#fff;color:var(--muted);font-size:11px;font-weight:600;transition:transform .12s}
 .chip:active{transform:scale(.95)}
 .chip.on{background:var(--mist);border-color:var(--primary);color:var(--deep)}
-.chip.hard.on{background:rgba(217,136,128,.15);border-color:rgba(217,136,128,.5);color:#B05D56}
+.chip.hard.on{background:rgba(95,185,191,.15);border-color:rgba(95,185,191,.5);color:#B05D56}
 .star{padding:0 2px;border:0;background:none;color:var(--line);font-size:30px;line-height:1;transition:transform .12s,color .15s}
 .star:active{transform:scale(.88)}
 .star.on{color:#E7A33B}
@@ -294,7 +294,7 @@ input.text::placeholder{color:var(--mist)}
 .bar span{display:block;height:100%;border-radius:99px;background:var(--primary)}
 .timeline{position:relative;padding-left:24px}
 .timeline::before{content:"";position:absolute;left:7px;top:12px;bottom:12px;width:1px;background:var(--line)}
-.timeline .dot{position:absolute;left:-23px;top:24px;width:12px;height:12px;border:2px solid #fff;border-radius:50%;background:var(--primary);box-shadow:0 1px 4px rgba(42,45,51,.2)}
+.timeline .dot{position:absolute;left:-23px;top:24px;width:12px;height:12px;border:2px solid #fff;border-radius:50%;background:var(--primary);box-shadow:0 1px 4px rgba(34,84,90,.2)}
 .sel-island::after{content:"";position:absolute;inset:0;z-index:5;border-radius:inherit;box-shadow:inset 0 0 0 2px var(--deep);pointer-events:none}
 .island-card{position:relative;display:flex;flex-direction:column;justify-content:space-between;width:252px;height:282px;flex:none;padding:16px 16px 14px;border:0;border-radius:20px;text-align:left;overflow:hidden;color:var(--ink);transition:outline .15s,box-shadow .15s}
 .island-card .scene-scrim{background:linear-gradient(180deg,rgba(255,255,255,.22) 0%,rgba(255,255,255,.08) 38%,rgba(255,255,255,.9) 100%)}
@@ -335,9 +335,9 @@ input.text::placeholder{color:var(--mist)}
 .rv-tab small{font-size:9px;font-weight:700;opacity:.7}
 .rv-tab.on{background:var(--ink);border-color:var(--ink);color:#fff}
 .rv-list{display:grid;gap:12px;margin-top:14px}
-.rv-card{padding:16px;border-radius:20px;background:#fff;box-shadow:0 8px 24px rgba(85,128,176,.07)}
+.rv-card{padding:16px;border-radius:20px;background:#fff;box-shadow:0 8px 24px rgba(113,201,206,.07)}
 .rv-card-head{display:flex;align-items:center;gap:10px}
-.rv-avatar{display:grid;place-items:center;width:34px;height:34px;flex:none;border-radius:50%;background:linear-gradient(150deg,#C6D8EA,#EAF1F8);color:var(--deep);font-size:13px;font-weight:700}
+.rv-avatar{display:grid;place-items:center;width:34px;height:34px;flex:none;border-radius:50%;background:linear-gradient(150deg,#A6E3E9,#E3FDFD);color:var(--deep);font-size:13px;font-weight:700}
 .rv-name{margin:0;font-size:12px;font-weight:700}
 .rv-date{margin:3px 0 0;font-size:9px;color:var(--muted)}
 .rv-rating{margin-left:auto;text-align:right}
@@ -351,10 +351,10 @@ input.text::placeholder{color:var(--mist)}
 .lightbox-close{position:absolute;top:20px;right:20px;width:40px;height:40px;border:0;border-radius:50%;background:rgba(255,255,255,.18);color:#fff;font-size:22px;line-height:1}
 .lightbox-tip{position:absolute;bottom:24px;left:0;width:100%;text-align:center;color:rgba(255,255,255,.6);font-size:10px}
 .rv-media-item img{width:100%;height:100%;object-fit:cover;display:block}
-.rv-play{position:absolute;inset:0;display:grid;place-items:center;background:rgba(42,45,51,.22);color:#fff;font-size:14px}
+.rv-play{position:absolute;inset:0;display:grid;place-items:center;background:rgba(34,84,90,.22);color:#fff;font-size:14px}
 .rv-foot{display:flex;align-items:center;justify-content:space-between;margin-top:12px;padding-top:10px;border-top:1px solid var(--line);font-size:9px;color:var(--muted)}
 .rv-like{padding:4px 8px;border:1px solid var(--line);border-radius:999px;background:#fff;color:var(--muted);font-size:10px}
-.rv-like.on{color:#B05D56;border-color:rgba(217,136,128,.5);background:rgba(217,136,128,.08)}
+.rv-like.on{color:#B05D56;border-color:rgba(95,185,191,.5);background:rgba(95,185,191,.08)}
 .rv-more-wrap{margin-top:16px;text-align:center}
 .rv-more-wrap .btn{justify-content:center;padding:0 16px}
 .rv-empty{padding:40px 20px;border-radius:20px;background:#fff;text-align:center;font-size:11px;color:var(--muted)}
@@ -369,7 +369,7 @@ input.text::placeholder{color:var(--mist)}
 .rv-honest{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:14px 0 2px;font-size:10px;color:var(--muted)}
 .rv-honest span{display:inline-flex;align-items:center;gap:6px}
 .rv-honest button{display:inline-flex;align-items:center;gap:4px;border:0;background:none;color:var(--muted);font-size:10px}
-.rv-badge{display:inline-block;margin-left:6px;padding:2px 6px;border-radius:6px;background:rgba(231,163,60,.14);color:#B57A22;font-size:8px;font-weight:700;vertical-align:middle}
+.rv-badge{display:inline-block;margin-left:6px;padding:2px 6px;border-radius:6px;background:rgba(166,227,233,.14);color:#B57A22;font-size:8px;font-weight:700;vertical-align:middle}
 .rv-media{max-width:none;grid-template-columns:repeat(3,1fr);gap:8px}
 .rv-media.single{grid-template-columns:repeat(2,1fr);max-width:180px}
 .rv-media-item{border-radius:10px}
@@ -392,11 +392,11 @@ input.text::placeholder{color:var(--mist)}
       <animate attributeName="opacity" from="0" to="1" dur=".6s" begin=".15s" fill="freeze"/>
     </path>
     <g fill="#fff"><path d="M35 486a49 49 0 0 1 98 0z"/><path d="M165 346a42 42 0 0 1 84 0z"/><path d="M279 234a36 36 0 0 1 72 0z"/></g>
-    <g fill="#2A2D33"><circle cx="84" cy="465" r="7"/><circle cx="207" cy="333" r="6"/><circle cx="315" cy="226" r="5"/></g>
-    <circle cx="0" cy="0" r="6.5" fill="#2A2D33">
+    <g fill="#22545A"><circle cx="84" cy="465" r="7"/><circle cx="207" cy="333" r="6"/><circle cx="315" cy="226" r="5"/></g>
+    <circle cx="0" cy="0" r="6.5" fill="#22545A">
       <animateMotion dur="1.35s" begin="0s" fill="freeze" path="M84 465 Q150 388 207 333 Q270 270 315 226"/>
     </circle>
-    <circle cx="0" cy="0" r="11" fill="none" stroke="#2A2D33" stroke-opacity=".22" stroke-width="2">
+    <circle cx="0" cy="0" r="11" fill="none" stroke="#22545A" stroke-opacity=".22" stroke-width="2">
       <animateMotion dur="1.35s" begin="0s" fill="freeze" path="M84 465 Q150 388 207 333 Q270 270 315 226"/>
     </circle>
   </svg>
@@ -456,11 +456,11 @@ const DATA = {
     {id:'deep',name:'深度体验',duration:'两天',price:159,desc:'参与完整辅助流程',hint:'适合想再靠近一点的人'}
   ],
   islands:[
-    {id:'photo',name:'摄影师',en:'PHOTOGRAPHER',glyph:'摄',g:['#9FB9D8','#C6D8EA'],price:99,duration:'2 小时',distance:'1.8km',spots:4,rating:4.8,explorers:932,hot:'本周热门',summary:'跟着摄影师走一条街，完成一次真实的人像拍摄。',tags:['拍摄过程','空间布置','独自判断']},
-    {id:'coffee',name:'咖啡师',en:'BARISTA',glyph:'咖',g:['#A9BED8','#D3E1EE'],price:99,duration:'2 小时',distance:'1.2km',spots:3,rating:4.9,explorers:1268,hot:'新手友好',summary:'从磨豆到出杯，站进吧台经历一个真实的早高峰。',tags:['与人交流','动手创造','重复性动作']},
-    {id:'design',name:'平面设计师',en:'GRAPHIC DESIGNER',glyph:'设',g:['#8FAFD2','#BBD0E6'],price:159,duration:'2 小时',distance:'2.4km',spots:2,rating:4.9,explorers:764,hot:'作品可带走',summary:'拿到一份真实需求，和设计师一起把想法排成版面。',tags:['后期修图','空间布置','细节要求高']},
-    {id:'florist',name:'花艺师',en:'FLORIST',glyph:'花',g:['#A7BEDC','#D6E3F0'],price:99,duration:'2 小时',distance:'1.6km',spots:5,rating:4.8,explorers:1102,hot:'适合周末',summary:'为一束花做配色和造型，做完可以带回家。',tags:['动手创造','空间布置','与人交流']},
-    {id:'baker',name:'烘焙师',en:'BAKER',glyph:'焙',g:['#9DB8D8','#CFDFEC'],price:99,duration:'半天',distance:'2.8km',spots:2,rating:4.7,explorers:688,hot:'半天限定',summary:'从称量到出炉，跟着烘焙师完成一条完整生产线。',tags:['动手创造','重复性动作','即时反馈']},
+    {id:'photo',name:'摄影师',en:'PHOTOGRAPHER',glyph:'摄',g:['#A6E3E9','#A6E3E9'],price:99,duration:'2 小时',distance:'1.8km',spots:4,rating:4.8,explorers:932,hot:'本周热门',summary:'跟着摄影师走一条街，完成一次真实的人像拍摄。',tags:['拍摄过程','空间布置','独自判断']},
+    {id:'coffee',name:'咖啡师',en:'BARISTA',glyph:'咖',g:['#A6E3E9','#CBF1F5'],price:99,duration:'2 小时',distance:'1.2km',spots:3,rating:4.9,explorers:1268,hot:'新手友好',summary:'从磨豆到出杯，站进吧台经历一个真实的早高峰。',tags:['与人交流','动手创造','重复性动作']},
+    {id:'design',name:'平面设计师',en:'GRAPHIC DESIGNER',glyph:'设',g:['#71C9CE','#A6E3E9'],price:159,duration:'2 小时',distance:'2.4km',spots:2,rating:4.9,explorers:764,hot:'作品可带走',summary:'拿到一份真实需求，和设计师一起把想法排成版面。',tags:['后期修图','空间布置','细节要求高']},
+    {id:'florist',name:'花艺师',en:'FLORIST',glyph:'花',g:['#CBF1F5','#D6E3F0'],price:99,duration:'2 小时',distance:'1.6km',spots:5,rating:4.8,explorers:1102,hot:'适合周末',summary:'为一束花做配色和造型，做完可以带回家。',tags:['动手创造','空间布置','与人交流']},
+    {id:'baker',name:'烘焙师',en:'BAKER',glyph:'焙',g:['#71C9CE','#E3FDFD'],price:99,duration:'半天',distance:'2.8km',spots:2,rating:4.7,explorers:688,hot:'半天限定',summary:'从称量到出炉，跟着烘焙师完成一条完整生产线。',tags:['动手创造','重复性动作','即时反馈']},
     {id:'video',name:'化妆师',en:'MAKEUP ARTIST',glyph:'妆',g:['#D9C4D6','#EDE0EA'],price:159,duration:'2 小时',distance:'3.0km',spots:3,rating:4.8,explorers:853,hot:'色彩搭配',summary:'跟着化妆师完成一次日常妆容，认识色彩、工具与光线。',tags:['动手创造','细节要求高','即时反馈']},
     {id:'light',name:'灯光布景师',en:'LIGHT & SET',glyph:'光',g:['#A3BAD9','#D2E0EE'],price:159,duration:'2 小时',distance:'2.6km',spots:3,rating:4.9,explorers:412,hot:'小众方向',summary:'不站在镜头前，也能决定一个画面怎么被看见。',tags:['空间布置','动手创造','后期配合']},
     {id:'retouch',name:'宠物美容',en:'PET GROOMER',glyph:'宠',g:['#C6D8C6','#E2ECE0'],price:139,duration:'2 小时',distance:'2.1km',spots:4,rating:4.8,explorers:526,hot:'毛孩子友好',summary:'给宠物做一次基础护理，学习怎么和它们耐心相处。',tags:['动手创造','细节要求高','耐心陪伴']}
@@ -1202,7 +1202,7 @@ const STORE_GALLERIES={
 }
 const AVATAR_PROPS={
   florist:{label:'花艺',color:'#E88FA0',svg:`<g><g fill="#F3A0B0">${[0,72,144,216,288].map(a=>`<ellipse cx="0" cy="-13" rx="7" ry="11" transform="rotate(${a})"/>`).join('')}</g><circle r="7" fill="#F6C85F"/></g>`},
-  photo:{label:'摄影',color:'#5C7FA8',svg:`<g><rect x="-21" y="-12" width="42" height="26" rx="6" fill="#5C7FA8"/><rect x="-10" y="-19" width="16" height="8" rx="3" fill="#46668C"/><circle cy="1" r="10" fill="#EAF1F8" stroke="#3D5A7A" stroke-width="2.5"/><circle cy="1" r="4.5" fill="#9FC0DE"/><circle cx="14" cy="-6" r="2.4" fill="#F6C85F"/></g>`},
+  photo:{label:'摄影',color:'#3E9BA2',svg:`<g><rect x="-21" y="-12" width="42" height="26" rx="6" fill="#3E9BA2"/><rect x="-10" y="-19" width="16" height="8" rx="3" fill="#2B5D63"/><circle cy="1" r="10" fill="#E3FDFD" stroke="#22545A" stroke-width="2.5"/><circle cy="1" r="4.5" fill="#A6E3E9"/><circle cx="14" cy="-6" r="2.4" fill="#F6C85F"/></g>`},
   video:{label:'化妆',color:'#D96A8A',svg:`<g><rect x="-6" y="-3" width="12" height="21" rx="2" fill="#D96A8A"/><path d="M-5 -3 L-4 -16 L4 -16 L5 -3 Z" fill="#F2A0B8"/><rect x="-7" y="16" width="14" height="5" rx="2" fill="#A84A6A"/><path d="M12 -14 q8 6 0 12 q-8-6 0-12Z" fill="#F3C9D5"/></g>`},
   coffee:{label:'咖啡',color:'#A97E5C',svg:`<g><path d="M-14 -8 L-11 14 Q-10 18 -6 18 L8 18 Q12 18 13 14 L16 -8 Z" fill="#FFF8F0" stroke="#A97E5C" stroke-width="2"/><path d="M16 -4 Q26 -4 24 4 Q22 10 14 8" fill="none" stroke="#A97E5C" stroke-width="3"/><ellipse cy="-8" rx="15" ry="4" fill="#C89B70"/><path d="M-5 -14 q4-5 0-9M4 -14 q4-5 0-9" stroke="#A97E5C" stroke-width="2" fill="none" stroke-linecap="round"/></g>`},
   baker:{label:'烘焙',color:'#E0A94E',svg:`<g><path d="M-20 8 Q-16 -12 0 -10 Q16 -12 20 8 Q0 18 -20 8 Z" fill="#E0A94E"/><path d="M-12 4 Q-10 -6 -4 -4 M-2 6 Q2 -6 8 -4" stroke="#C68B32" stroke-width="2.2" fill="none" stroke-linecap="round"/></g>`},
@@ -1213,16 +1213,16 @@ const AVATAR_PROPS={
 const AVATAR_IMG={base:'./images/portrait/base.jpg',photo:'./images/portrait/photo.jpg',coffee:'./images/portrait/coffee.jpg',baker:'./images/portrait/baker.jpg',florist:'./images/portrait/florist.jpg',design:'./images/portrait/design.jpg',video:'./images/portrait/video.jpg',retouch:'./images/portrait/retouch.jpg',light:'./images/portrait/light.jpg'}
 const AVATAR_LOOK_NAME={base:'原始形象',photo:'摄影师',coffee:'咖啡师',baker:'烘焙师',florist:'花艺师',design:'平面设计师',video:'化妆师',retouch:'宠物美容师',light:'灯光布景师'}
 const PRESET_AVATARS=[
-  {name:'短发女生',gender:'female',bg:'#EDE7F2',cloth:'#A99AC4',hair:'#3A2E28',skin:'#FBE0D0'},
+  {name:'短发女生',gender:'female',bg:'#E3FDFD',cloth:'#A99AC4',hair:'#3A2E28',skin:'#FBE0D0'},
   {name:'长发女生',gender:'female',bg:'#F5E6E0',cloth:'#E8A0A0',hair:'#2E2A28',skin:'#F8DCCB'},
   {name:'丸子头女生',gender:'female',bg:'#E8EDE6',cloth:'#8FA98C',hair:'#6B4A34',skin:'#F5D8C6'},
   {name:'卷发女生',gender:'female',bg:'#F5EFE0',cloth:'#D9A86A',hair:'#A97449',skin:'#FBE0D0'},
-  {name:'马尾女生',gender:'female',bg:'#E2EAF2',cloth:'#7C9FC4',hair:'#333944',skin:'#F8DCCB'},
+  {name:'马尾女生',gender:'female',bg:'#E3FDFD',cloth:'#7C9FC4',hair:'#22545A',skin:'#F8DCCB'},
   {name:'短发男生',gender:'male',bg:'#E6ECE8',cloth:'#7E9B78',hair:'#2E2A28',skin:'#F5D8C6'},
   {name:'卷发男生',gender:'male',bg:'#F0E6DE',cloth:'#C08B6A',hair:'#453329',skin:'#FBE0D0'},
-  {name:'戴眼镜男生',gender:'male',bg:'#E8EAF2',cloth:'#8C93B8',hair:'#333944',skin:'#F8DCCB'},
+  {name:'戴眼镜男生',gender:'male',bg:'#E3FDFD',cloth:'#6E9EA3',hair:'#22545A',skin:'#F8DCCB'},
   {name:'寸头男生',gender:'male',bg:'#EDE6DC',cloth:'#B09070',hair:'#5E4332',skin:'#F5D8C6'},
-  {name:'中分男生',gender:'male',bg:'#E4EDF2',cloth:'#6E8FA8',hair:'#2E2A28',skin:'#FBE0D0'}
+  {name:'中分男生',gender:'male',bg:'#E3FDFD',cloth:'#3E9BA2',hair:'#2E2A28',skin:'#FBE0D0'}
 ]
 function presetAvatarSvg(idx){
   const c=PRESET_AVATARS[idx]
@@ -1265,14 +1265,14 @@ function avatarSvg(){
   const interests=S.interests||[]
   const themeOf={
     florist:{bg:'#E7E1D5',cloth:'#8FA98C'},coffee:{bg:'#E6DCD2',cloth:'#9E7E68'},
-    design:{bg:'#DFE0EA',cloth:'#7C8FC4'},photo:{bg:'#DCE3EC',cloth:'#6E8FA8'},
+    design:{bg:'#CBF1F5',cloth:'#7C8FC4'},photo:{bg:'#CBF1F5',cloth:'#3E9BA2'},
     baker:{bg:'#EEE3D2',cloth:'#C79A6A'},video:{bg:'#EBDDE2',cloth:'#BE7F8E'},
     light:{bg:'#EDE7D6',cloth:'#B49A63'},retouch:{bg:'#E0E8DC',cloth:'#8FAE88'}
   }
   const t=themeOf[interests[0]]||{}
-  const bg=t.bg||pick(['#E7E1D5','#E6DCD2','#DFE0EA','#DCE3EC','#EEE3D2','#EBDDE2','#EDE7D6','#E0E8DC'])
-  const cloth=t.cloth||pick(['#8FA98C','#9E7E68','#7C8FC4','#6E8FA8','#C79A6A','#BE7F8E','#B49A63','#8FAE88'])
-  const hair=pick(['#2E2A28','#453329','#5E4332','#7A5337','#A97449','#333944','#6B4A4A'])
+  const bg=t.bg||pick(['#E7E1D5','#E6DCD2','#CBF1F5','#CBF1F5','#EEE3D2','#EBDDE2','#EDE7D6','#E0E8DC'])
+  const cloth=t.cloth||pick(['#8FA98C','#9E7E68','#7C8FC4','#3E9BA2','#C79A6A','#BE7F8E','#B49A63','#8FAE88'])
+  const hair=pick(['#2E2A28','#453329','#5E4332','#7A5337','#A97449','#22545A','#6B4A4A'])
   const skin=pick(['#FBE0D0','#F8DCCB','#F5D8C6'])
   const blush=pick(['#E9A39B','#EBA8A0','#E79F99'])
   const ink=pick(['#3A302C','#2E2A28','#4A3A34'])
@@ -1339,27 +1339,27 @@ function avatarSvg(){
 function islandArtSvg(idx,glyph){
   const themes=[
     {land:'#C8DFC2',edge:'#EADFC0',tree:'#7FA98C',roof:'#C79F7A',house:'#F2E7D2'},
-    {land:'#E4EFF5',edge:'#F4F8FA',tree:'#9BB9C7',roof:'#B6CBD8',house:'#FFFFFF'},
+    {land:'#E3FDFD',edge:'#F2FDFD',tree:'#A6E3E9',roof:'#CBF1F5',house:'#FFFFFF'},
     {land:'#EBDCB4',edge:'#F2E6C8',tree:'#C2AB74',roof:'#D3A96F',house:'#F6EBCF'},
     {land:'#CFE3C8',edge:'#EADFC0',tree:'#78A785',roof:'#C99A6C',house:'#F4E8CE'},
     {land:'#DCCFE4',edge:'#EDE2EF',tree:'#A98CB4',roof:'#B482A8',house:'#F4EAF4'},
-    {land:'#D7DDE2',edge:'#ECEFF1',tree:'#94A6B0',roof:'#AEBCC6',house:'#F4F6F7'}
+    {land:'#CBF1F5',edge:'#F2FDFD',tree:'#6E9EA3',roof:'#6E9EA3',house:'#F2FDFD'}
   ]
   const t=themes[idx%themes.length]
   const deco=[
     `<g><circle cx="46" cy="56" r="9" fill="${t.tree}"/><circle cx="58" cy="62" r="7" fill="${t.tree}"/><rect x="45" y="62" width="3" height="9" fill="#A8835F"/><rect x="57" y="67" width="3" height="6" fill="#A8835F"/><rect x="104" y="58" width="22" height="16" rx="2" fill="${t.house}"/><path d="M101 58 115 46 129 58Z" fill="${t.roof}"/><rect x="111" y="64" width="7" height="10" rx="1" fill="${t.roof}"/></g>`,
-    `<g><path d="M46 66 54 42 62 66Z" fill="${t.tree}"/><path d="M50 56 54 38 58 56Z" fill="${t.tree}"/><circle cx="104" cy="58" r="7" fill="#fff"/><circle cx="104" cy="49" r="5" fill="#fff"/><circle cx="102" cy="57" r="1" fill="#6F8390"/><circle cx="106" cy="57" r="1" fill="#6F8390"/><path d="M98 66h12" stroke="#9BB9C7" stroke-width="3" stroke-linecap="round"/></g>`,
+    `<g><path d="M46 66 54 42 62 66Z" fill="${t.tree}"/><path d="M50 56 54 38 58 56Z" fill="${t.tree}"/><circle cx="104" cy="58" r="7" fill="#fff"/><circle cx="104" cy="49" r="5" fill="#fff"/><circle cx="102" cy="57" r="1" fill="#3E9BA2"/><circle cx="106" cy="57" r="1" fill="#3E9BA2"/><path d="M98 66h12" stroke="#A6E3E9" stroke-width="3" stroke-linecap="round"/></g>`,
     `<g><rect x="50" y="48" width="7" height="22" rx="3" fill="${t.tree}"/><rect x="43" y="55" width="7" height="6" rx="3" fill="${t.tree}"/><rect x="57" y="52" width="7" height="6" rx="3" fill="${t.tree}"/><path d="M96 68 104 48 112 68Z" fill="${t.house}"/><path d="M93 68h22" stroke="#C2AB74" stroke-width="3" stroke-linecap="round"/></g>`,
     `<g><rect x="51" y="50" width="4" height="20" fill="#A8835F"/><path d="M53 52q-14-8-18-2 10 0 18 8M53 52q14-8 18-2-10 0-18 8" fill="${t.tree}"/><rect x="101" y="54" width="20" height="14" rx="2" fill="${t.house}"/><path d="M98 54 111 42 124 54Z" fill="${t.roof}"/></g>`,
     `<g><rect x="49" y="52" width="5" height="14" fill="#F2E7D2"/><path d="M42 54q9-14 18 0Z" fill="#C48AA8"/><circle cx="51" cy="53" r="1.2" fill="#fff"/><circle cx="55" cy="53" r="1.2" fill="#fff"/><rect x="102" y="56" width="4" height="12" fill="#F2E7D2"/><path d="M96 58q9-13 17 0Z" fill="#A98CB4"/><circle cx="104" cy="57" r="1.2" fill="#fff"/></g>`,
     `<g><rect x="42" y="48" width="14" height="22" fill="${t.house}"/><path d="M40 48 49 34 58 48Z" fill="${t.roof}"/><rect x="96" y="42" width="16" height="28" fill="${t.house}"/><path d="M94 42 104 28 114 42Z" fill="${t.roof}"/><rect x="102" y="54" width="5" height="16" fill="${t.roof}"/></g>`
   ]
   return `<svg viewBox="0 0 160 120" aria-hidden="true">
-    <ellipse cx="80" cy="92" rx="62" ry="18" fill="rgba(85,128,176,.12)"/>
+    <ellipse cx="80" cy="92" rx="62" ry="18" fill="rgba(113,201,206,.12)"/>
     <path d="M18 68 C22 44 48 30 80 30 C112 30 140 46 143 68 C145 86 118 99 80 99 C42 99 15 86 18 68Z" fill="${t.edge}" stroke="rgba(255,255,255,.9)" stroke-width="3"/>
     <path d="M24 64 C28 46 50 35 80 35 C110 35 134 47 137 65 C139 80 112 90 80 90 C48 90 21 80 24 64Z" fill="${t.land}"/>
     ${deco[idx%deco.length]}
-    <text x="80" y="80" text-anchor="middle" font-size="13" font-weight="800" fill="rgba(85,128,176,.32)">DAY ${idx+1}</text>
+    <text x="80" y="80" text-anchor="middle" font-size="13" font-weight="800" fill="rgba(113,201,206,.32)">DAY ${idx+1}</text>
   </svg>`
 }
 function collageHtml(visited){
@@ -1379,9 +1379,9 @@ function islandMapSvg(pos,visited){
     ${pos.map(([x,y],idx)=>{
       const on=visited.includes(DATA.islands[idx].id)
       return `<g transform="translate(${x} ${y})" opacity="${on?1:.58}">
-        <ellipse cx="0" cy="3.6" rx="10" ry="5.6" fill="rgba(42,45,51,.10)"/>
+        <ellipse cx="0" cy="3.6" rx="10" ry="5.6" fill="rgba(34,84,90,.10)"/>
         <path d="M0,-9 C5,-10 10,-6 9.5,-1 C11,4 6,9 0,8.5 C-6,10 -10,5 -9.5,0 C-10,-5 -5,-9 0,-9Z" fill="${colors[idx%colors.length]}" stroke="rgba(255,255,255,.9)" stroke-width=".8"/>
-        <circle cx="-5" cy="-2" r="1.5" fill="rgba(110,150,194,.35)"/><circle cx="4.5" cy="-4" r="1.1" fill="rgba(110,150,194,.28)"/><circle cx="5.5" cy="3" r="1.3" fill="rgba(255,255,255,.6)"/>
+        <circle cx="-5" cy="-2" r="1.5" fill="rgba(113,201,206,.35)"/><circle cx="4.5" cy="-4" r="1.1" fill="rgba(113,201,206,.28)"/><circle cx="5.5" cy="3" r="1.3" fill="rgba(255,255,255,.6)"/>
       </g>`
     }).join('')}
   </svg>`
@@ -1390,21 +1390,21 @@ function sceneArt(id){
   const photo=PHOTOS[id]
   if(photo)return `<div class="scene"><div class="scene-photo" style="background-image:url('./images/${photo[0]}');background-position:${photo[1]}"></div><div class="scene-glass"></div></div><div class="scene-scrim"></div>`
   const palettes={
-    photo:['#DCE7F2','#AFC6DE'],coffee:['#EADFD2','#CBB7A0'],design:['#E4E2EF','#C3C1DC'],
-    florist:['#E5EDDC','#BFD2B2'],baker:['#F1E5D3','#DCC3A1'],video:['#DDE4F0','#B8C5DD'],
-    light:['#EAE6D8','#D1C8AC'],retouch:['#E2E9F0','#BCCBDC']
+    photo:['#CBF1F5','#AFC6DE'],coffee:['#EADFD2','#CBB7A0'],design:['#E4E2EF','#C3C1DC'],
+    florist:['#E5EDDC','#BFD2B2'],baker:['#F1E5D3','#DCC3A1'],video:['#CBF1F5','#A6E3E9'],
+    light:['#EAE6D8','#D1C8AC'],retouch:['#E3FDFD','#CBF1F5']
   }
   const p=palettes[id]||palettes.photo
   let art=''
-  if(id==='photo')art=`<path d="M0 138Q80 112 160 136T320 128V180H0Z" fill="#94AFCC" opacity=".45"/><circle cx="252" cy="48" r="24" fill="#fff" opacity=".7"/><g filter="url(#sh)"><rect x="88" y="66" width="146" height="80" rx="16" fill="#42536A"/><rect x="108" y="54" width="42" height="16" rx="5" fill="#35445A"/><circle cx="164" cy="106" r="35" fill="#263344"/><circle cx="164" cy="106" r="25" fill="#6E96C2"/><circle cx="164" cy="106" r="13" fill="#1E2A38"/><rect x="205" y="78" width="16" height="10" rx="3" fill="#DCE7F2"/></g><path d="M212 58l24-20M232 74l28-12" stroke="#fff" stroke-width="3" opacity=".7" stroke-linecap="round"/>`
-  else if(id==='coffee')art=`<ellipse cx="160" cy="158" rx="150" ry="22" fill="#B9A68E" opacity=".55"/><g filter="url(#sh)"><rect x="78" y="54" width="104" height="78" rx="10" fill="#5A6472"/><rect x="88" y="66" width="84" height="34" rx="6" fill="#D9E2EC"/><rect x="96" y="76" width="26" height="14" rx="3" fill="#6E96C2"/><rect x="130" y="76" width="34" height="14" rx="3" fill="#A8BED6"/><path d="M130 106h28v18h-28z" fill="#394454"/><rect x="120" y="122" width="48" height="8" rx="4" fill="#2A3340"/></g><g filter="url(#sh)"><path d="M194 102h48v26a18 18 0 0 1-18 18h-12a18 18 0 0 1-18-18z" fill="#fff"/><path d="M242 108h12a12 12 0 0 1 0 24h-12" fill="none" stroke="#fff" stroke-width="7"/><path d="M204 92q8-10 2-20M220 92q8-10 2-20M236 92q8-10 2-20" stroke="#fff" stroke-width="3" fill="none" opacity=".8" stroke-linecap="round"/></g><ellipse cx="74" cy="146" rx="10" ry="14" fill="#6B5341"/><ellipse cx="292" cy="142" rx="10" ry="14" fill="#6B5341"/>`
-  else if(id==='design')art=`<rect x="0" y="146" width="320" height="34" fill="#B7B4D2" opacity=".5"/><g filter="url(#sh)"><rect x="72" y="44" width="176" height="102" rx="9" fill="#3E4560"/><rect x="82" y="54" width="156" height="82" rx="4" fill="#F7F6FB"/><rect x="90" y="62" width="66" height="10" rx="3" fill="#6E96C2"/><rect x="90" y="80" width="42" height="48" rx="4" fill="#C6D8EA"/><rect x="138" y="80" width="92" height="8" rx="3" fill="#D8DEEC"/><rect x="138" y="94" width="72" height="8" rx="3" fill="#D8DEEC"/><rect x="138" y="108" width="82" height="8" rx="3" fill="#D8DEEC"/><rect x="138" y="122" width="46" height="8" rx="3" fill="#A8D08D"/></g><circle cx="70" cy="142" r="9" fill="#D98880"/><circle cx="92" cy="146" r="9" fill="#A8D08D"/><circle cx="114" cy="142" r="9" fill="#6E96C2"/><path d="M238 156l46-46" stroke="#8C7BA6" stroke-width="7" stroke-linecap="round"/>`
-  else if(id==='florist')art=`<path d="M0 148Q160 128 320 150V180H0Z" fill="#A9C295" opacity=".5"/><g stroke="#6F8F63" stroke-width="4" fill="none"><path d="M160 142V74M160 112l-34-28M160 104l36-30M160 128l-26 20"/></g><g fill="#7E9C70"><ellipse cx="132" cy="82" rx="20" ry="9" transform="rotate(-28 132 82)"/><ellipse cx="194" cy="74" rx="20" ry="9" transform="rotate(32 194 74)"/><ellipse cx="136" cy="142" rx="18" ry="8" transform="rotate(22 136 142)"/></g><g filter="url(#sh)" fill="#F6F3EC"><circle cx="160" cy="62" r="15"/><circle cx="143" cy="72" r="14"/><circle cx="177" cy="72" r="14"/><circle cx="151" cy="49" r="13"/><circle cx="170" cy="49" r="13"/><circle cx="132" cy="84" r="12"/><circle cx="188" cy="84" r="12"/></g><circle cx="160" cy="68" r="10" fill="#D9B26A"/><g filter="url(#sh)"><path d="M132 126h56l-8 40h-40z" fill="#8FA9C7"/><ellipse cx="160" cy="126" rx="28" ry="7" fill="#B9CFE5"/></g>`
+  if(id==='photo')art=`<path d="M0 138Q80 112 160 136T320 128V180H0Z" fill="#A6E3E9" opacity=".45"/><circle cx="252" cy="48" r="24" fill="#fff" opacity=".7"/><g filter="url(#sh)"><rect x="88" y="66" width="146" height="80" rx="16" fill="#22545A"/><rect x="108" y="54" width="42" height="16" rx="5" fill="#2B5D63"/><circle cx="164" cy="106" r="35" fill="#22545A"/><circle cx="164" cy="106" r="25" fill="#71C9CE"/><circle cx="164" cy="106" r="13" fill="#1B4449"/><rect x="205" y="78" width="16" height="10" rx="3" fill="#CBF1F5"/></g><path d="M212 58l24-20M232 74l28-12" stroke="#fff" stroke-width="3" opacity=".7" stroke-linecap="round"/>`
+  else if(id==='coffee')art=`<ellipse cx="160" cy="158" rx="150" ry="22" fill="#A6E3E9" opacity=".55"/><g filter="url(#sh)"><rect x="78" y="54" width="104" height="78" rx="10" fill="#2B5D63"/><rect x="88" y="66" width="84" height="34" rx="6" fill="#CBF1F5"/><rect x="96" y="76" width="26" height="14" rx="3" fill="#71C9CE"/><rect x="130" y="76" width="34" height="14" rx="3" fill="#CBF1F5"/><path d="M130 106h28v18h-28z" fill="#22545A"/><rect x="120" y="122" width="48" height="8" rx="4" fill="#2B5D63"/></g><g filter="url(#sh)"><path d="M194 102h48v26a18 18 0 0 1-18 18h-12a18 18 0 0 1-18-18z" fill="#fff"/><path d="M242 108h12a12 12 0 0 1 0 24h-12" fill="none" stroke="#fff" stroke-width="7"/><path d="M204 92q8-10 2-20M220 92q8-10 2-20M236 92q8-10 2-20" stroke="#fff" stroke-width="3" fill="none" opacity=".8" stroke-linecap="round"/></g><ellipse cx="74" cy="146" rx="10" ry="14" fill="#3E9BA2"/><ellipse cx="292" cy="142" rx="10" ry="14" fill="#3E9BA2"/>`
+  else if(id==='design')art=`<rect x="0" y="146" width="320" height="34" fill="#CBF1F5" opacity=".5"/><g filter="url(#sh)"><rect x="72" y="44" width="176" height="102" rx="9" fill="#22545A"/><rect x="82" y="54" width="156" height="82" rx="4" fill="#F2FDFD"/><rect x="90" y="62" width="66" height="10" rx="3" fill="#71C9CE"/><rect x="90" y="80" width="42" height="48" rx="4" fill="#A6E3E9"/><rect x="138" y="80" width="92" height="8" rx="3" fill="#CBF1F5"/><rect x="138" y="94" width="72" height="8" rx="3" fill="#CBF1F5"/><rect x="138" y="108" width="82" height="8" rx="3" fill="#CBF1F5"/><rect x="138" y="122" width="46" height="8" rx="3" fill="#A6E3E9"/></g><circle cx="70" cy="142" r="9" fill="#D98880"/><circle cx="92" cy="146" r="9" fill="#A6E3E9"/><circle cx="114" cy="142" r="9" fill="#71C9CE"/><path d="M238 156l46-46" stroke="#71C9CE" stroke-width="7" stroke-linecap="round"/>`
+  else if(id==='florist')art=`<path d="M0 148Q160 128 320 150V180H0Z" fill="#A9C295" opacity=".5"/><g stroke="#6F8F63" stroke-width="4" fill="none"><path d="M160 142V74M160 112l-34-28M160 104l36-30M160 128l-26 20"/></g><g fill="#7E9C70"><ellipse cx="132" cy="82" rx="20" ry="9" transform="rotate(-28 132 82)"/><ellipse cx="194" cy="74" rx="20" ry="9" transform="rotate(32 194 74)"/><ellipse cx="136" cy="142" rx="18" ry="8" transform="rotate(22 136 142)"/></g><g filter="url(#sh)" fill="#F6F3EC"><circle cx="160" cy="62" r="15"/><circle cx="143" cy="72" r="14"/><circle cx="177" cy="72" r="14"/><circle cx="151" cy="49" r="13"/><circle cx="170" cy="49" r="13"/><circle cx="132" cy="84" r="12"/><circle cx="188" cy="84" r="12"/></g><circle cx="160" cy="68" r="10" fill="#D9B26A"/><g filter="url(#sh)"><path d="M132 126h56l-8 40h-40z" fill="#71C9CE"/><ellipse cx="160" cy="126" rx="28" ry="7" fill="#A6E3E9"/></g>`
   else if(id==='baker')art=`<path d="M0 146h320v34H0z" fill="#CDB28E" opacity=".6"/><g filter="url(#sh)"><ellipse cx="120" cy="122" rx="58" ry="30" fill="#C98F52"/><path d="M84 112q34-22 72 0" stroke="#F0D7AF" stroke-width="6" fill="none" stroke-linecap="round"/><path d="M98 122q28-18 58 0" stroke="#F0D7AF" stroke-width="5" fill="none" stroke-linecap="round"/><ellipse cx="232" cy="130" rx="42" ry="24" fill="#D9A367"/><path d="M206 124q24-16 50 0" stroke="#F7E2BE" stroke-width="5" fill="none" stroke-linecap="round"/></g><g stroke="#B08B54" stroke-width="3" fill="none"><path d="M268 108v-42M268 76q-12-14-2-24M268 82q12-14 2-24"/><path d="M282 108V70M282 84q-10-12-2-20"/></g><rect x="40" y="148" width="92" height="9" rx="4" fill="#8C6F4D" opacity=".7"/>`
-  else if(id==='video')art=`<path d="M0 0h320v180H0z" fill="none"/><g filter="url(#sh)"><rect x="70" y="62" width="180" height="86" rx="10" fill="#39465C"/><rect x="82" y="76" width="156" height="58" rx="4" fill="#DDE6F1"/><path d="M70 62l180-22v26L70 88z" fill="#2A3548"/><g fill="#DDE6F1"><path d="M88 60l14-2 8 20-14 2zM122 56l14-2 8 20-14 2zM156 52l14-2 8 20-14 2zM190 48l14-2 8 20-14 2z"/></g><path d="M150 92l34 15-34 15z" fill="#6E96C2"/></g><g stroke="#fff" stroke-width="2" opacity=".6"><path d="M44 48h20M44 60h12M44 72h20"/></g>`
-  else if(id==='light')art=`<path d="M92 62h58l74 92H18z" fill="#F4EBCF" opacity=".75"/><g filter="url(#sh)"><rect x="66" y="40" width="92" height="48" rx="10" fill="#4B5264"/><rect x="76" y="48" width="72" height="32" rx="5" fill="#F5EFDB"/><circle cx="150" cy="64" r="12" fill="#E3C878"/><path d="M112 88v58M82 146h60" stroke="#4B5264" stroke-width="6" stroke-linecap="round"/></g><g filter="url(#sh)"><rect x="212" y="72" width="64" height="54" rx="6" fill="#F8F3E6" stroke="#B6AC8D" stroke-width="4"/><path d="M244 126v24M224 150h40" stroke="#6E6A5C" stroke-width="5" stroke-linecap="round"/></g>`
-  else art=`<g filter="url(#sh)"><rect x="64" y="46" width="130" height="96" rx="9" fill="#fff"/><rect x="72" y="54" width="114" height="68" rx="4" fill="#9FB9D8"/><circle cx="100" cy="76" r="9" fill="#F4E2B8"/><path d="M74 120l32-34 24 24 18-18 36 34z" fill="#6E96C2"/><rect x="72" y="128" width="72" height="5" rx="2" fill="#C6D8EA"/></g><g filter="url(#sh)"><rect x="204" y="54" width="62" height="82" rx="10" fill="#F7F8FB"/><path d="M218 76h34M218 92h34M218 108h34" stroke="#C6D8EA" stroke-width="4" stroke-linecap="round"/><circle cx="230" cy="76" r="6" fill="#6E96C2"/><circle cx="244" cy="92" r="6" fill="#A8D08D"/><circle cx="226" cy="108" r="6" fill="#D98880"/></g><circle cx="210" cy="134" r="22" fill="none" stroke="#6E96C2" stroke-width="5"/><path d="M226 150l16 16" stroke="#6E96C2" stroke-width="6" stroke-linecap="round"/>`
-  return `<div class="scene"><svg viewBox="0 0 320 180" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><defs><linearGradient id="bg_${id}" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="${p[0]}"/><stop offset="1" stop-color="${p[1]}"/></linearGradient><filter id="sh" x="-30%" y="-30%" width="160%" height="160%"><feDropShadow dx="0" dy="6" stdDeviation="7" flood-color="#2A2D33" flood-opacity=".18"/></filter></defs><rect width="320" height="180" fill="url(#bg_${id})"/>${art}</svg>${id==='coffee'?'<div class="coffee-photo"></div>':''}</div><div class="scene-scrim"></div>`
+  else if(id==='video')art=`<path d="M0 0h320v180H0z" fill="none"/><g filter="url(#sh)"><rect x="70" y="62" width="180" height="86" rx="10" fill="#22545A"/><rect x="82" y="76" width="156" height="58" rx="4" fill="#CBF1F5"/><path d="M70 62l180-22v26L70 88z" fill="#2B5D63"/><g fill="#CBF1F5"><path d="M88 60l14-2 8 20-14 2zM122 56l14-2 8 20-14 2zM156 52l14-2 8 20-14 2zM190 48l14-2 8 20-14 2z"/></g><path d="M150 92l34 15-34 15z" fill="#71C9CE"/></g><g stroke="#fff" stroke-width="2" opacity=".6"><path d="M44 48h20M44 60h12M44 72h20"/></g>`
+  else if(id==='light')art=`<path d="M92 62h58l74 92H18z" fill="#F4EBCF" opacity=".75"/><g filter="url(#sh)"><rect x="66" y="40" width="92" height="48" rx="10" fill="#22545A"/><rect x="76" y="48" width="72" height="32" rx="5" fill="#F5EFDB"/><circle cx="150" cy="64" r="12" fill="#E3C878"/><path d="M112 88v58M82 146h60" stroke="#22545A" stroke-width="6" stroke-linecap="round"/></g><g filter="url(#sh)"><rect x="212" y="72" width="64" height="54" rx="6" fill="#F8F3E6" stroke="#B6AC8D" stroke-width="4"/><path d="M244 126v24M224 150h40" stroke="#6E6A5C" stroke-width="5" stroke-linecap="round"/></g>`
+  else art=`<g filter="url(#sh)"><rect x="64" y="46" width="130" height="96" rx="9" fill="#fff"/><rect x="72" y="54" width="114" height="68" rx="4" fill="#A6E3E9"/><circle cx="100" cy="76" r="9" fill="#CBF1F5"/><path d="M74 120l32-34 24 24 18-18 36 34z" fill="#71C9CE"/><rect x="72" y="128" width="72" height="5" rx="2" fill="#A6E3E9"/></g><g filter="url(#sh)"><rect x="204" y="54" width="62" height="82" rx="10" fill="#F2FDFD"/><path d="M218 76h34M218 92h34M218 108h34" stroke="#A6E3E9" stroke-width="4" stroke-linecap="round"/><circle cx="230" cy="76" r="6" fill="#71C9CE"/><circle cx="244" cy="92" r="6" fill="#A6E3E9"/><circle cx="226" cy="108" r="6" fill="#D98880"/></g><circle cx="210" cy="134" r="22" fill="none" stroke="#71C9CE" stroke-width="5"/><path d="M226 150l16 16" stroke="#71C9CE" stroke-width="6" stroke-linecap="round"/>`
+  return `<div class="scene"><svg viewBox="0 0 320 180" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><defs><linearGradient id="bg_${id}" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="${p[0]}"/><stop offset="1" stop-color="${p[1]}"/></linearGradient><filter id="sh" x="-30%" y="-30%" width="160%" height="160%"><feDropShadow dx="0" dy="6" stdDeviation="7" flood-color="#22545A" flood-opacity=".18"/></filter></defs><rect width="320" height="180" fill="url(#bg_${id})"/>${art}</svg>${id==='coffee'?'<div class="coffee-photo"></div>':''}</div><div class="scene-scrim"></div>`
 }
 
 function viewLogin(){
@@ -1477,7 +1477,7 @@ function viewHome(){
       ${(()=>{
         const pending=S.bookings.filter(b=>b.status==='booked')
         if(!pending.length)return ''
-        return `<div class="card" style="padding:18px 20px;margin-bottom:14px;background:linear-gradient(135deg,rgba(85,128,176,.12),#fff)">
+        return `<div class="card" style="padding:18px 20px;margin-bottom:14px;background:linear-gradient(135deg,rgba(113,201,206,.12),#fff)">
           <div style="display:flex;align-items:center;justify-content:space-between"><p style="margin:0;font-size:10px;font-weight:700;letter-spacing:.16em;color:var(--primary)">UPCOMING · 待体验</p>${pill(pending.length+' 条预约')}</div>
           <div style="display:grid;gap:10px;margin-top:14px">${pending.map(b=>{
             const bi=findIsland(b.islandId),bl=findLevel(b.levelId)
@@ -1489,7 +1489,7 @@ function viewHome(){
                 <div style="flex:1;min-width:0"><div style="display:flex;align-items:center;justify-content:space-between;gap:6px"><b style="font-size:12px">${bi.name}</b>${pill('已锁定','green')}</div><p style="margin:3px 0 0;font-size:10px;color:var(--muted)">${bookingDate(b)} · ${bl.name} · 到店 ${arrivalTime(bst.id)}</p></div>
                 <button data-action="reminder-start" data-id="${b.id}" style="flex:none;padding:8px 12px;border:0;border-radius:99px;background:var(--primary);color:#fff;font-size:10px;font-weight:700">开始体验</button>
               </div>
-              <div style="display:flex;align-items:center;gap:8px;margin-top:10px;padding:10px 14px;border-radius:14px;${cd.soon?'background:linear-gradient(135deg,rgba(217,136,128,.18),rgba(231,163,60,.12));border:1px solid rgba(217,136,128,.4)':'background:var(--mistlight)'}">
+              <div style="display:flex;align-items:center;gap:8px;margin-top:10px;padding:10px 14px;border-radius:14px;${cd.soon?'background:linear-gradient(135deg,rgba(95,185,191,.18),rgba(166,227,233,.12));border:1px solid rgba(95,185,191,.4)':'background:var(--mistlight)'}">
                 <span style="color:${cd.soon?'#B05D56':'var(--primary)'}">${ICON.clock}</span>
                 <span id="cd-${b.id}" style="font-size:${cd.soon?'18':'15'}px;font-weight:800;letter-spacing:.5px;color:${cd.soon?'#B05D56':'var(--primary)'}">${cd.text}</span>
                 ${cd.soon?'<span style="margin-left:auto;font-size:10px;font-weight:700;color:#B05D56">即将到店</span>':''}
@@ -1571,7 +1571,7 @@ function viewMap(){
       <div id="storeTrack" class="hide-scroll" style="display:flex;gap:12px;overflow-x:auto;margin:12px -4px 0;padding:0 4px 8px">
         ${DATA.stores.map(st=>{
           const i=findIsland(st.islandId)
-          return `<div class="store-card click" data-action="store" data-store="${st.id}" style="width:278px;flex:none;padding:14px;border-radius:22px;background:#fff;box-shadow:${st.id===S.activeStore?'inset 0 0 0 2px var(--deep)':'0 10px 30px rgba(85,128,176,.08)'}">
+          return `<div class="store-card click" data-action="store" data-store="${st.id}" style="width:278px;flex:none;padding:14px;border-radius:22px;background:#fff;box-shadow:${st.id===S.activeStore?'inset 0 0 0 2px var(--deep)':'0 10px 30px rgba(113,201,206,.08)'}">
             <div class="scene-card" style="height:92px;display:flex;flex-direction:column;align-items:flex-start;justify-content:space-between;padding:12px 16px;border-radius:18px">
               ${sceneArt(i.id)}
               <p style="position:relative;z-index:2;margin:0;font-size:9px;font-weight:700;letter-spacing:.16em;color:var(--deep)">${i.en}</p>
@@ -1598,9 +1598,9 @@ function viewDetail(){
   return `<div class="screen" style="padding-bottom:120px">
     <div class="hdr tight" style="padding-bottom:32px">${hdrDeco()}<div class="content">
       ${backBar(pill('第 46 天','glasspill'))}
-      <p style="margin:16px 0 0;font-size:10px;font-weight:700;letter-spacing:.22em;color:rgba(85,128,176,.7)">ISLAND DETAIL</p>
+      <p style="margin:16px 0 0;font-size:10px;font-weight:700;letter-spacing:.22em;color:rgba(113,201,206,.7)">ISLAND DETAIL</p>
       <h1 style="margin:8px 0 0;font-size:26px;letter-spacing:-.6px">嗨，先看看这座岛</h1>
-      <p style="margin:8px 0 0;font-size:12px;color:rgba(85,128,176,.85)">看过了再决定，不必现在就有答案。</p>
+      <p style="margin:8px 0 0;font-size:12px;color:rgba(113,201,206,.85)">看过了再决定，不必现在就有答案。</p>
     </div></div>
     <div class="pad" style="padding-top:20px">
       <div class="hide-scroll" style="display:flex;gap:8px;overflow-x:auto;margin:0 -4px;padding:0 4px 4px">
@@ -1685,7 +1685,7 @@ function viewStoreMap(){
         <div class="ping"></div>
         <button class="photo-pin active" style="${mapPt(st.x,st.y)}" title="${st.name}"><span class="photo-ring"><img src="./images/${(PHOTOS[i.id]||PHOTOS.photo)[0]}" alt=""></span><span class="photo-tag">${esc(i.name)}</span></button>
       </div>
-      <div style="position:absolute;left:16px;bottom:20px;padding:10px 14px;border-radius:18px;background:rgba(255,255,255,.94);max-width:calc(100% - 32px);box-shadow:0 8px 24px rgba(85,128,176,.12)">
+      <div style="position:absolute;left:16px;bottom:20px;padding:10px 14px;border-radius:18px;background:rgba(255,255,255,.94);max-width:calc(100% - 32px);box-shadow:0 8px 24px rgba(113,201,206,.12)">
         <p style="margin:0;font-size:11px;font-weight:800;color:var(--deep)">${esc(st.name)}</p>
         <p style="margin:4px 0 0;font-size:10px;color:var(--muted)">${esc(st.address)}</p>
       </div>
@@ -1767,8 +1767,8 @@ function viewExperience(){
       ${backBar(pill('导师带练中','glasspill'))}
       <div style="display:flex;align-items:center;gap:8px;margin-top:16px"><span style="width:8px;height:8px;border-radius:50%;background:var(--okay);box-shadow:0 0 0 4px rgba(168,208,141,.35)"></span><span style="font-size:11px;font-weight:600;color:var(--deep)">体验进行中</span></div>
       <h1 style="margin:12px 0 0;font-size:27px;letter-spacing:-.6px">登岛：${i.name}</h1>
-      <p style="margin:8px 0 0;font-size:12px;color:rgba(85,128,176,.85)">${lv.name} · ${lv.duration} · 不用急，跟着导师走。</p>
-      <div class="glass-strong" style="display:inline-flex;align-items:center;gap:8px;margin-top:20px;padding:8px 16px;border-radius:99px"><span style="color:var(--deep)">${ICON.clock}</span><span style="font-size:10px;color:rgba(85,128,176,.85)">剩余</span><span id="timer" style="font-size:15px;font-weight:700;letter-spacing:.5px;font-variant-numeric:tabular-nums">${fmtTime(S.elapsed)}</span></div>
+      <p style="margin:8px 0 0;font-size:12px;color:rgba(113,201,206,.85)">${lv.name} · ${lv.duration} · 不用急，跟着导师走。</p>
+      <div class="glass-strong" style="display:inline-flex;align-items:center;gap:8px;margin-top:20px;padding:8px 16px;border-radius:99px"><span style="color:var(--deep)">${ICON.clock}</span><span style="font-size:10px;color:rgba(113,201,206,.85)">剩余</span><span id="timer" style="font-size:15px;font-weight:700;letter-spacing:.5px;font-variant-numeric:tabular-nums">${fmtTime(S.elapsed)}</span></div>
     </div></div>
     <div class="pad overlap" style="margin-top:-28px">
       <div class="card" style="margin-top:16px;padding:20px;border:1px solid rgba(198,216,234,.6);background:rgba(234,241,248,.6);box-shadow:none">
@@ -1790,10 +1790,10 @@ function viewDiary(){
   const ratingText=['还没打分','不太喜欢','一般','还可以','比较喜欢','很喜欢'][d.rating||0]
   return `<div class="screen">
     <div class="hdr tight" style="padding-bottom:36px">${hdrDeco()}<div class="content">
-      ${backBar('<span style="font-size:10px;color:rgba(85,128,176,.7)">STEP 7/8</span>')}
-      <p style="margin:16px 0 0;font-size:10px;font-weight:700;letter-spacing:.22em;color:rgba(85,128,176,.7)">EXPERIENCE JOURNAL</p>
+      ${backBar('<span style="font-size:10px;color:rgba(113,201,206,.7)">STEP 7/8</span>')}
+      <p style="margin:16px 0 0;font-size:10px;font-weight:700;letter-spacing:.22em;color:rgba(113,201,206,.7)">EXPERIENCE JOURNAL</p>
       <h1 style="margin:8px 0 0;font-size:26px;letter-spacing:-.5px">体验日记</h1>
-      <p style="margin:8px 0 0;font-size:12px;line-height:1.7;color:rgba(85,128,176,.85)">这次不是评价商家，是记下你自己的感受。<br>${findIsland(S.selectedIslandId).name} · 今天</p>
+      <p style="margin:8px 0 0;font-size:12px;line-height:1.7;color:rgba(113,201,206,.85)">这次不是评价商家，是记下你自己的感受。<br>${findIsland(S.selectedIslandId).name} · 今天</p>
     </div></div>
     <div class="pad" style="padding-top:20px;display:grid;gap:14px">
       <div class="card" style="padding:20px"><p style="margin:0;font-size:12px;font-weight:700">01 · 哪个环节最有意思？<span style="font-weight:400;color:var(--muted)"> 可多选</span></p><div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:16px">${opts.fun.map(([id,label])=>`<button class="chip ${d.fun.includes(id)?'on':''}" data-action="diary-chip" data-group="fun" data-id="${id}">${label}</button>`).join('')}</div>${d.fun.includes('f_other')?`<input data-field="funOther" maxlength="24" value="${esc(d.funOther)}" placeholder="写出你觉得有意思的环节" style="width:100%;margin-top:10px;padding:12px 14px;border:1px solid var(--line);border-radius:14px;background:var(--page);font-size:12px;color:var(--ink);outline:none">`:''}</div>
@@ -1815,9 +1815,9 @@ function viewResult(){
   return `<div class="screen">
     <div class="hdr" style="padding-bottom:56px">${hdrDeco()}<div class="content">
       <div style="display:flex;align-items:flex-start;justify-content:space-between">${pill('EXPLORATION RECORD','glasspill')}<div class="glass-strong" style="display:grid;place-items:center;width:70px;height:70px;border-radius:50%;color:var(--deep)">${ICON.compass}</div></div>
-      <p style="margin:32px 0 0;font-size:11px;color:rgba(85,128,176,.85)">${i.name} · ${lv.name} · 今天</p>
+      <p style="margin:32px 0 0;font-size:11px;color:rgba(113,201,206,.85)">${i.name} · ${lv.name} · 今天</p>
       <h1 style="margin:12px 0 0;font-size:28px;line-height:1.35;letter-spacing:-.8px">${leave?'这座岛，你登过了':'这座岛，你想再登一次'}</h1>
-      <p style="margin:12px 0 0;max-width:300px;font-size:12px;line-height:1.9;color:rgba(85,128,176,.85)">${leave?'登过一座岛、看过、决定不留下，你排除掉一个可能不适合的方向，也省下了未来几个月的纠结。':'喜欢也不需要马上变成答案。你想再靠近一点，就把它记进跳岛日志，继续观察。'}</p>
+      <p style="margin:12px 0 0;max-width:300px;font-size:12px;line-height:1.9;color:rgba(113,201,206,.85)">${leave?'登过一座岛、看过、决定不留下，你排除掉一个可能不适合的方向，也省下了未来几个月的纠结。':'喜欢也不需要马上变成答案。你想再靠近一点，就把它记进跳岛日志，继续观察。'}</p>
       ${isPreview?`<p style="display:inline-block;margin-top:16px;padding:6px 12px;border-radius:99px;background:rgba(255,255,255,.5);font-size:10px;color:var(--deep)">预览中 · 本次记录仍为「${actual==='leave'?'离岛排除':'想再登岛'}」</p>`:''}
     </div></div>
     <div class="pad overlap" style="margin-top:-26px">
@@ -1843,10 +1843,10 @@ function viewJournal(){
   return `<div class="screen">
     <div class="hdr" style="padding-bottom:64px">${hdrDeco()}<div class="content">
       ${backBar()}
-      <p style="margin:0;font-size:10px;font-weight:700;letter-spacing:.22em;color:rgba(85,128,176,.7)">ISLAND JOURNAL</p>
+      <p style="margin:0;font-size:10px;font-weight:700;letter-spacing:.22em;color:rgba(113,201,206,.7)">ISLAND JOURNAL</p>
       <h1 style="margin:12px 0 0;font-size:27px;letter-spacing:-.6px">跳岛日志</h1>
-      <p style="margin:6px 0 0;font-size:12px;color:rgba(85,128,176,.85)">跳岛的第 ${S.profile.islandDays} 天 · ${esc(S.profile.nickname)}</p>
-      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:24px">${[['已登岛 · 座'],['离岛排除 · 座'],['想再登岛 · 座']].map(([l],idx)=>`<div class="glass-strong" style="padding:12px 8px;border-radius:18px;text-align:center"><p style="margin:0;font-size:21px;font-weight:800;line-height:1">${stats[idx]}</p><p style="margin:6px 0 0;font-size:9px;color:rgba(85,128,176,.85)">${l}</p></div>`).join('')}</div>
+      <p style="margin:6px 0 0;font-size:12px;color:rgba(113,201,206,.85)">跳岛的第 ${S.profile.islandDays} 天 · ${esc(S.profile.nickname)}</p>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:24px">${[['已登岛 · 座'],['离岛排除 · 座'],['想再登岛 · 座']].map(([l],idx)=>`<div class="glass-strong" style="padding:12px 8px;border-radius:18px;text-align:center"><p style="margin:0;font-size:21px;font-weight:800;line-height:1">${stats[idx]}</p><p style="margin:6px 0 0;font-size:9px;color:rgba(113,201,206,.85)">${l}</p></div>`).join('')}</div>
     </div></div>
     <div class="pad overlap" style="margin-top:-28px">
       <div class="card" style="padding:20px"><div style="display:flex;align-items:baseline;justify-content:space-between"><h2 style="margin:0;font-size:16px">工作偏好画像</h2><span style="font-size:10px;color:var(--muted)">来自每次登岛后的记录</span></div>
@@ -1874,10 +1874,10 @@ function viewSummary(){
   const tag=(t,tone)=>`<span class="pill ${tone||''}" style="white-space:normal">${esc(labelText(t))}</span>`
   return `<div class="screen">
     <div class="hdr tight" style="padding-bottom:40px">${hdrDeco()}<div class="content">
-      ${backBar('<span style="font-size:10px;color:rgba(85,128,176,.7)">EXPERIENCE SUMMARY</span>')}
-      <p style="margin:16px 0 0;font-size:10px;font-weight:700;letter-spacing:.22em;color:rgba(85,128,176,.7)">EXPERIENCE SUMMARY</p>
+      ${backBar('<span style="font-size:10px;color:rgba(113,201,206,.7)">EXPERIENCE SUMMARY</span>')}
+      <p style="margin:16px 0 0;font-size:10px;font-weight:700;letter-spacing:.22em;color:rgba(113,201,206,.7)">EXPERIENCE SUMMARY</p>
       <h1 style="margin:8px 0 0;font-size:26px;letter-spacing:-.5px">体验总结</h1>
-      <p style="margin:8px 0 0;font-size:12px;line-height:1.7;color:rgba(85,128,176,.85)">这是你 ${r.date} 在「${esc(r.islandName)}」留下的感受。<br>当时写下的，都还在这里。</p>
+      <p style="margin:8px 0 0;font-size:12px;line-height:1.7;color:rgba(113,201,206,.85)">这是你 ${r.date} 在「${esc(r.islandName)}」留下的感受。<br>当时写下的，都还在这里。</p>
     </div></div>
     <div class="pad overlap" style="margin-top:-20px;display:grid;gap:14px">
       <div class="card" style="padding:20px">
@@ -1936,10 +1936,10 @@ function viewAvatar(){
   const look=(S.avatarLook&&AVATAR_IMG[S.avatarLook])?S.avatarLook:'base'
   return `<div class="screen">
     <div class="hdr tight" style="padding-bottom:36px">${hdrDeco()}<div class="content">
-      ${backBar('<span style="font-size:10px;color:rgba(85,128,176,.7)">MY AVATAR</span>')}
-      <p style="margin:16px 0 0;font-size:10px;font-weight:700;letter-spacing:.22em;color:rgba(85,128,176,.7)">ISLAND SELF-PORTRAIT</p>
+      ${backBar('<span style="font-size:10px;color:rgba(113,201,206,.7)">MY AVATAR</span>')}
+      <p style="margin:16px 0 0;font-size:10px;font-weight:700;letter-spacing:.22em;color:rgba(113,201,206,.7)">ISLAND SELF-PORTRAIT</p>
       <h1 style="margin:8px 0 0;font-size:26px;letter-spacing:-.5px">我的岛屿画像</h1>
-      <p style="margin:8px 0 0;font-size:12px;line-height:1.7;color:rgba(85,128,176,.85)">你走过的每座岛，都会长成你身上的一部分。<br>换过多少种颜色，就成了现在的你。</p>
+      <p style="margin:8px 0 0;font-size:12px;line-height:1.7;color:rgba(113,201,206,.85)">你走过的每座岛，都会长成你身上的一部分。<br>换过多少种颜色，就成了现在的你。</p>
     </div></div>
     <div class="pad overlap" style="margin-top:-24px">
       <div class="card" style="padding:14px">
@@ -1969,9 +1969,9 @@ function viewUnlock(){
   const visited=[...new Set(S.records.map(r=>r.islandId))]
   return `<div class="screen">
     <div class="hdr" id="unlockHead">${hdrDeco()}<div class="content">
-      <p style="margin:0;font-size:10px;font-weight:700;letter-spacing:.22em;color:rgba(85,128,176,.7)">ISLAND MAP</p>
+      <p style="margin:0;font-size:10px;font-weight:700;letter-spacing:.22em;color:rgba(113,201,206,.7)">ISLAND MAP</p>
       <h1 style="margin:12px 0 0;font-size:27px;letter-spacing:-.6px">跳岛地图</h1>
-      <p style="margin:6px 0 0;font-size:12px;color:rgba(85,128,176,.85)">每尝试一个职业，就点亮一块岛屿碎片。</p>
+      <p style="margin:6px 0 0;font-size:12px;color:rgba(113,201,206,.85)">每尝试一个职业，就点亮一块岛屿碎片。</p>
       <div class="glass-strong" style="display:inline-block;margin-top:20px;padding:8px 16px;border-radius:99px;font-size:11px;font-weight:700;color:var(--deep)">慢慢拼出你的职业群岛</div>
     </div></div>
     <div class="pad overlap" style="margin-top:-26px">
@@ -2018,9 +2018,9 @@ function viewProfile(){
   const logged=S.loggedIn
   return `<div class="screen">
     <div class="hdr" style="padding-bottom:56px">${hdrDeco()}<div class="content">
-      <p style="margin:0;font-size:10px;font-weight:700;letter-spacing:.22em;color:rgba(85,128,176,.7)">MY ACCOUNT</p>
-      <div style="display:flex;align-items:center;gap:14px;margin-top:18px"><button data-action="avatar-picker" title="点击更换头像" style="flex:none;width:58px;height:58px;padding:0;border:1px solid rgba(255,255,255,.9);border-radius:50%;overflow:hidden;background:#fff;box-shadow:0 8px 20px rgba(42,45,51,.16)">${S.profile.avatar!=null?presetAvatarSvg(S.profile.avatar):ring('岛',44)}</button><div style="min-width:0"><h1 style="margin:0;font-size:24px;letter-spacing:-.5px">${logged?esc(S.profile.nickname):'未登录'}</h1><p style="margin:6px 0 0;font-size:11px;color:rgba(85,128,176,.85)">${logged?esc(S.profile.signature||''):'登录后查看你的跳岛记录'}</p><p style="margin:4px 0 0;font-size:9px;color:var(--muted)">跳岛第 ${S.profile.islandDays} 天 · 点头像可更换</p></div></div>
-      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:20px">${[['预约',S.bookings.length],['登岛',S.records.length],['日志',S.records.length]].map(([l,v])=>`<div class="glass-strong" style="padding:10px 6px;border-radius:16px;text-align:center"><p style="margin:0;font-size:18px;font-weight:800;line-height:1">${v}</p><p style="margin:6px 0 0;font-size:9px;color:rgba(85,128,176,.85)">${l}</p></div>`).join('')}</div>
+      <p style="margin:0;font-size:10px;font-weight:700;letter-spacing:.22em;color:rgba(113,201,206,.7)">MY ACCOUNT</p>
+      <div style="display:flex;align-items:center;gap:14px;margin-top:18px"><button data-action="avatar-picker" title="点击更换头像" style="flex:none;width:58px;height:58px;padding:0;border:1px solid rgba(255,255,255,.9);border-radius:50%;overflow:hidden;background:#fff;box-shadow:0 8px 20px rgba(34,84,90,.16)">${S.profile.avatar!=null?presetAvatarSvg(S.profile.avatar):ring('岛',44)}</button><div style="min-width:0"><h1 style="margin:0;font-size:24px;letter-spacing:-.5px">${logged?esc(S.profile.nickname):'未登录'}</h1><p style="margin:6px 0 0;font-size:11px;color:rgba(113,201,206,.85)">${logged?esc(S.profile.signature||''):'登录后查看你的跳岛记录'}</p><p style="margin:4px 0 0;font-size:9px;color:var(--muted)">跳岛第 ${S.profile.islandDays} 天 · 点头像可更换</p></div></div>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:20px">${[['预约',S.bookings.length],['登岛',S.records.length],['日志',S.records.length]].map(([l,v])=>`<div class="glass-strong" style="padding:10px 6px;border-radius:16px;text-align:center"><p style="margin:0;font-size:18px;font-weight:800;line-height:1">${v}</p><p style="margin:6px 0 0;font-size:9px;color:rgba(113,201,206,.85)">${l}</p></div>`).join('')}</div>
     </div></div>
     <div class="pad overlap" style="margin-top:-26px">
       <div class="card" style="padding:8px">
@@ -2029,7 +2029,7 @@ function viewProfile(){
         <button class="menu-row" data-action="account-info"><span class="ico">${ICON.user}</span><span class="lbl">账号信息</span><span class="val">${logged?'已登录':'未登录'} ${ICON.right}</span></button>
         <button class="menu-row" data-action="switch-account"><span class="ico">${ICON.chev}</span><span class="lbl">切换账号</span><span class="val">${ICON.right}</span></button>
       </div>
-      <button class="card" data-action="edit-profile" style="display:flex;align-items:center;justify-content:center;gap:8px;width:100%;margin-top:16px;padding:14px;border:1px solid var(--line);background:linear-gradient(135deg,rgba(85,128,176,.1),#fff);color:var(--primary);font-size:12px;font-weight:700">✎ 编辑个人资料</button>
+      <button class="card" data-action="edit-profile" style="display:flex;align-items:center;justify-content:center;gap:8px;width:100%;margin-top:16px;padding:14px;border:1px solid var(--line);background:linear-gradient(135deg,rgba(113,201,206,.1),#fff);color:var(--primary);font-size:12px;font-weight:700">✎ 编辑个人资料</button>
       <div style="margin-top:12px">${logged?`<button data-action="logout" class="card" style="display:flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:16px;border:0;color:var(--off);font-size:13px;font-weight:700">${ICON.logout} 退出登录</button>`:btn('登录 / 注册','login','deep')}</div>
       <p class="smallnote" style="text-align:center;margin-top:24px">这是个演示账号，数据只保存在当前页面。</p>
       ${footer()}
@@ -2042,7 +2042,7 @@ function viewBookings(){
     <div class="hdr" style="padding-bottom:40px">${hdrDeco()}<div class="content">
       ${backBar(pill('MY BOOKINGS','glasspill'))}
       <h1 style="margin:12px 0 0;font-size:26px;letter-spacing:-.5px">预约记录</h1>
-      <p style="margin:8px 0 0;font-size:12px;color:rgba(85,128,176,.85)">每一座准备登的岛，都在这里等你。</p>
+      <p style="margin:8px 0 0;font-size:12px;color:rgba(113,201,206,.85)">每一座准备登的岛，都在这里等你。</p>
     </div></div>
     <div class="pad overlap" style="margin-top:-20px">
       ${list.length?`<div style="display:grid;gap:12px">${list.map(b=>{
@@ -2062,9 +2062,9 @@ function viewBookingDetail(){
   return `<div class="screen" style="padding-bottom:120px">
     <div class="hdr" style="padding-bottom:48px">${hdrDeco()}<div class="content">
       ${backBar(pill(done?'已完成':'待体验','glasspill'))}
-      <p style="margin:16px 0 0;font-size:10px;font-weight:700;letter-spacing:.22em;color:rgba(85,128,176,.7)">BOOKING DETAIL</p>
+      <p style="margin:16px 0 0;font-size:10px;font-weight:700;letter-spacing:.22em;color:rgba(113,201,206,.7)">BOOKING DETAIL</p>
       <h1 style="margin:8px 0 0;font-size:26px;letter-spacing:-.5px">${i.name}</h1>
-      <p style="margin:8px 0 0;font-size:12px;color:rgba(85,128,176,.85)">${i.en} · ${lv.name}</p>
+      <p style="margin:8px 0 0;font-size:12px;color:rgba(113,201,206,.85)">${i.en} · ${lv.name}</p>
     </div></div>
     <div class="pad overlap" style="margin-top:-28px">
       <div class="card" style="padding:20px">
@@ -2087,13 +2087,13 @@ function viewPayment(){
   const b=S.bookings.find(x=>x.id===S.activeBookingId)||S.bookings[0]
   if(!b)return viewBookings()
   const i=findIsland(b.islandId),lv=findLevel(b.levelId),price=levelPrice(b.islandId,b.levelId)
-  const methods=[['wechat','微信支付','WECHAT PAY','#7FC8A0'],['alipay','支付宝','ALIPAY','#8FC0E8'],['card','银行卡','BANK CARD','#C6B6E0'],['balance','跳岛余额','ISLAND BALANCE','#E8D3A9']]
+  const methods=[['wechat','微信支付','WECHAT PAY','#7FC8A0'],['alipay','支付宝','ALIPAY','#71C9CE'],['card','银行卡','BANK CARD','#C6B6E0'],['balance','跳岛余额','ISLAND BALANCE','#E8D3A9']]
   return `<div class="screen" style="padding-bottom:120px">
     <div class="hdr" style="padding-bottom:48px">${hdrDeco()}<div class="content">
       ${backBar(pill('PAYMENT','glasspill'))}
-      <p style="margin:16px 0 0;font-size:10px;font-weight:700;letter-spacing:.22em;color:rgba(85,128,176,.7)">确认并支付</p>
+      <p style="margin:16px 0 0;font-size:10px;font-weight:700;letter-spacing:.22em;color:rgba(113,201,206,.7)">确认并支付</p>
       <h1 style="margin:8px 0 0;font-size:26px;letter-spacing:-.5px">完成登岛预约</h1>
-      <p style="margin:8px 0 0;font-size:12px;color:rgba(85,128,176,.85)">${i.name} · ${lv.name} · ${bookingDate(b)}</p>
+      <p style="margin:8px 0 0;font-size:12px;color:rgba(113,201,206,.85)">${i.name} · ${lv.name} · ${bookingDate(b)}</p>
     </div></div>
     <div class="pad overlap" style="margin-top:-28px">
       <div class="card" style="padding:20px">
@@ -2120,9 +2120,9 @@ function viewBookingSuccess(){
   return `<div class="screen">
     <div class="hdr" style="padding-bottom:56px">${hdrDeco()}<div class="content">
       <div style="display:flex;align-items:center;justify-content:space-between">${pill('BOOKING CONFIRMED','glasspill')}<div class="glass-strong" style="display:grid;place-items:center;width:60px;height:60px;border-radius:50%;color:var(--deep)">${ICON.check}</div></div>
-      <p style="margin:32px 0 0;font-size:11px;color:rgba(85,128,176,.85)">${bookingDate(b)} · ${i.name}</p>
+      <p style="margin:32px 0 0;font-size:11px;color:rgba(113,201,206,.85)">${bookingDate(b)} · ${i.name}</p>
       <h1 style="margin:12px 0 0;font-size:28px;line-height:1.35;letter-spacing:-.8px">预约成功，登岛已锁定。</h1>
-      <p style="margin:12px 0 0;max-width:300px;font-size:12px;line-height:1.9;color:rgba(85,128,176,.85)">${lv.name} · ¥${levelPrice(b.islandId,b.levelId)} 已支付。准备好之后，就可以开始体验了。</p>
+      <p style="margin:12px 0 0;max-width:300px;font-size:12px;line-height:1.9;color:rgba(113,201,206,.85)">${lv.name} · ¥${levelPrice(b.islandId,b.levelId)} 已支付。准备好之后，就可以开始体验了。</p>
     </div></div>
     <div class="pad overlap" style="margin-top:-26px">
       <div class="card" style="padding:20px">
