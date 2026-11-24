@@ -303,6 +303,8 @@ input.text::placeholder{color:var(--mist)}
 .card-bottom{margin-top:auto}
 .card-en{margin:0;font-size:9px;font-weight:700;letter-spacing:.16em;line-height:1.3;color:var(--deep)}
 .card-name{margin:5px 0 0;font-size:20px;font-weight:700;line-height:1.25;letter-spacing:-.4px;color:var(--ink)}
+.reco-detail{display:inline-flex;align-items:center;gap:4px;flex:none;padding:6px 10px;border:0;border-radius:999px;background:var(--primary);color:#fff;font-size:10px;font-weight:700}
+.reco-detail svg{width:12px;height:12px}
 .card-meta{margin-top:14px;padding-top:12px;border-top:1px solid rgba(255,255,255,.6);display:flex;align-items:center;justify-content:space-between;gap:8px;font-size:11px;line-height:1.4;color:var(--deep)}
 .card-price{font-size:12px;font-weight:700;color:var(--ink);white-space:nowrap}
 .reco-empty{display:grid;place-items:center;width:100%;height:180px;border:1px dashed var(--mist);border-radius:18px;background:rgba(255,255,255,.6);font-size:12px;line-height:1.6;color:var(--muted);text-align:center;padding:0 20px}
@@ -985,7 +987,11 @@ function carouselHtml(list){
       ${sceneArt(i.id)}
       <div class="card-top"><span class="pill glasspill" style="color:var(--deep)">${i.hot}</span><span class="glass-strong" data-action="open-detail-id" data-id="${i.id}" title="先看看这座岛" style="display:grid;place-items:center;width:30px;height:30px;border-radius:50%;color:var(--deep)">${ICON.arrow}</span></div>
       <div class="card-bottom">
-        <p class="card-en">${i.en}</p><h3 class="card-name">${i.name}</h3>
+        <p class="card-en">${i.en}</p>
+        <div style="display:flex;align-items:center;justify-content:space-between;gap:8px">
+          <h3 class="card-name">${i.name}</h3>
+          <button class="reco-detail" data-action="open-detail-id" data-id="${i.id}">了解详情 ${ICON.arrow}</button>
+        </div>
         <div class="card-meta"><span>${DATA.levels[0].duration} · ${i.distance}</span><span class="card-price">¥${levelPrice(i.id,'taste')} 起</span></div>
       </div>
     </button>`).join('')}
@@ -1505,13 +1511,12 @@ function viewHome(){
           <button class="reco-more" data-action="nav-map">看看附近 ›</button>
         </div>
         <div id="recoCarouselHost">${carouselHtml(homeList)}</div>
-        <div style="margin-top:20px">
-          ${btn('了解详情','open-detail','deep')}
-          <p id="homeHint" style="margin:12px 0 0;text-align:center;font-size:11px;color:var(--muted)">${S.bookings.length?`已有 ${S.bookings.length} 条预约，可在个人中心查看。`:'先看看，再决定要不要留下。'}</p>
+        <div style="margin-top:10px">
+          <p id="homeHint" style="margin:8px 0 0;text-align:center;font-size:11px;color:var(--muted)">${S.bookings.length?`已有 ${S.bookings.length} 条预约，可在个人中心查看。`:'先看看，再决定要不要留下。'}</p>
           ${S.bookings.length?`<button data-action="nav-bookings" style="display:block;margin:8px auto 0;border:0;background:none;color:var(--primary);font-size:11px;font-weight:700">查看我的预约 →</button>`:''}
         </div>
       </div>
-      <div style="margin-top:24px"><div style="display:flex;align-items:baseline;justify-content:space-between"><h2 style="margin:0;font-size:16px">离你很近</h2><button data-action="nav-map" style="border:0;background:none;color:var(--muted);font-size:11px">打开地图 →</button></div>
+      <div style="margin-top:14px"><div style="display:flex;align-items:baseline;justify-content:space-between"><h2 style="margin:0;font-size:16px">离你很近</h2><button data-action="nav-map" style="border:0;background:none;color:var(--muted);font-size:11px">打开地图 →</button></div>
         <div style="margin-top:12px;display:grid;gap:10px">${DATA.islands.slice(2,4).map(i=>`<div class="card click" data-action="open-detail-id" data-id="${i.id}" style="display:flex;align-items:center;gap:12px;padding:14px">${ring(i.glyph,46)}<div style="flex:1;min-width:0"><p style="margin:0;font-size:13px;font-weight:700">${i.name}</p><p style="margin:3px 0 0;font-size:11px;color:var(--muted)">${i.distance} · ${DATA.levels[0].duration} · ${i.rating} 分</p></div><span style="color:var(--muted)">${ICON.right}</span></div>`).join('')}</div>
       </div>
       <div class="card" style="padding:20px;margin-top:24px">
@@ -1596,13 +1601,8 @@ function viewDetail(){
   const feed=DATA.islands.filter(x=>x.id!==i.id)
   const sections=[['shopInfo','店铺信息'],['levels','登岛方式'],['bookingDate','预约日期'],['mentorInfo','带教人信息']]
   return `<div class="screen" style="padding-bottom:120px">
-    <div class="hdr tight" style="padding-bottom:32px">${hdrDeco()}<div class="content">
+    <div class="pad" style="padding-top:calc(env(safe-area-inset-top,0px) + 12px)">
       ${backBar(pill('第 46 天','glasspill'))}
-      <p style="margin:16px 0 0;font-size:10px;font-weight:700;letter-spacing:.22em;color:rgba(113,201,206,.7)">ISLAND DETAIL</p>
-      <h1 style="margin:8px 0 0;font-size:26px;letter-spacing:-.6px">嗨，先看看这座岛</h1>
-      <p style="margin:8px 0 0;font-size:12px;color:rgba(113,201,206,.85)">看过了再决定，不必现在就有答案。</p>
-    </div></div>
-    <div class="pad" style="padding-top:20px">
       <div class="hide-scroll" style="display:flex;gap:8px;overflow-x:auto;margin:0 -4px;padding:0 4px 4px">
         ${sections.map(([id,label],idx)=>`<button class="pill ${idx===0?'dark':'default'}" data-action="scroll-detail" data-target="${id}">${label}</button>`).join('')}
       </div>
