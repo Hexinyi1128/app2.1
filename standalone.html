@@ -19,7 +19,7 @@ button{color:inherit;-webkit-appearance:none;appearance:none;cursor:pointer}
 #app{position:relative;width:100%;max-width:100%;min-height:100vh;min-height:100dvh;margin:0 auto;overflow:hidden;background:var(--page)}
 @media(min-width:640px){#app{margin:0;min-height:100dvh;border-radius:0;box-shadow:none}}
 .screen{min-height:100%;padding-bottom:100px}
-.overlap{position:relative;z-index:6;margin-left:12px;margin-right:12px}
+.overlap{position:relative;z-index:6;margin-left:0;margin-right:0}
 
 #splash{position:fixed;inset:0;z-index:100;display:grid;place-items:center;padding:8px;background:#E3FDFD}
 #splash .splash-frame{position:relative;width:100%;height:100%;overflow:hidden;border-radius:28px;background:linear-gradient(150deg,#A6E3E9,#71C9CE);box-shadow:0 24px 60px rgba(34,84,90,.2);transition:opacity .35s ease,transform .35s ease}
@@ -30,12 +30,12 @@ button{color:inherit;-webkit-appearance:none;appearance:none;cursor:pointer}
 #splash .stitle span{display:block;margin-top:8px;font-size:11px;letter-spacing:.14em;opacity:.85}
 #splash .sfoot{position:absolute;bottom:9%;left:0;right:0;text-align:center;color:rgba(255,255,255,.85);font-size:11px;letter-spacing:.08em;opacity:0;animation:fadeUp .6s .7s ease-out forwards}
 @keyframes fadeUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
-.pad{padding-left:20px;padding-right:20px}
+.pad{padding-left:10px;padding-right:10px}
 .hide-scroll{scrollbar-width:none;-ms-overflow-style:none}
 .hide-scroll::-webkit-scrollbar{display:none}
 
-.hdr{position:relative;overflow:hidden;margin:12px 12px 0;border:1px solid rgba(255,255,255,.55);border-radius:24px;background:linear-gradient(150deg,#A6E3E9,#A6E3E9);padding:28px 18px 30px}
-.hdr.tight{padding-top:22px}
+.hdr{position:relative;overflow:hidden;margin:0;border:1px solid rgba(255,255,255,.55);border-radius:24px;background:linear-gradient(150deg,#A6E3E9,#A6E3E9);padding:calc(24px + env(safe-area-inset-top,0px)) 12px 30px}
+.hdr.tight{padding-top:calc(22px + env(safe-area-inset-top,0px))}
 .glass{background:rgba(255,255,255,.34);border:1px solid rgba(255,255,255,.58);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
 .glass-strong{background:rgba(255,255,255,.62);border:1px solid rgba(255,255,255,.78);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
 .hdr .deco{position:absolute;inset:0;pointer-events:none}
@@ -243,7 +243,7 @@ button{color:inherit;-webkit-appearance:none;appearance:none;cursor:pointer}
 .map-label{position:absolute;font-size:10px;font-weight:700;letter-spacing:.16em;color:rgba(113,201,206,.55)}
 .map-ctrl{position:absolute;right:14px;top:14px;z-index:4;display:grid;gap:8px}
 .map-reset,.map-zoom{display:grid;place-items:center;width:34px;height:34px;border:1px solid rgba(255,255,255,.9);border-radius:50%;background:rgba(255,255,255,.9);color:var(--deep);box-shadow:0 4px 12px rgba(113,201,206,.16);backdrop-filter:blur(8px);font-size:17px;font-weight:700;line-height:1}
-.map-head{max-height:280px;overflow:hidden;margin:12px 12px 0;padding:28px 18px 22px;border:1px solid var(--line);border-radius:24px;background:#fff;box-shadow:0 8px 24px rgba(113,201,206,.08);transition:max-height .3s ease,padding .3s ease,margin .3s ease,opacity .25s ease}
+.map-head{max-height:280px;overflow:hidden;margin:0;padding:calc(24px + env(safe-area-inset-top,0px)) 12px 22px;border:1px solid var(--line);border-radius:24px;background:#fff;box-shadow:0 8px 24px rgba(113,201,206,.08);transition:max-height .3s ease,padding .3s ease,margin .3s ease,opacity .25s ease}
 .map-head.collapsed{max-height:0;padding-top:0;padding-bottom:0;margin-top:0;margin-bottom:0;opacity:0;pointer-events:none}
 .section-mini{position:fixed;top:calc(env(safe-area-inset-top,0px) + 10px);left:50%;transform:translate(-50%,-150%);z-index:39;display:flex;align-items:center;gap:10px;width:min(calc(100% - 24px),351px);padding:10px 14px;border:1px solid rgba(255,255,255,.85);border-radius:22px;background:rgba(255,255,255,.94);box-shadow:0 10px 28px rgba(113,201,206,.2);backdrop-filter:blur(12px);text-align:left;font:inherit;opacity:0;pointer-events:none;transition:transform .28s ease,opacity .28s ease}
 .section-mini.show{transform:translate(-50%,0);opacity:1;pointer-events:auto}
