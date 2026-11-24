@@ -45,7 +45,7 @@ button{color:inherit;-webkit-appearance:none;appearance:none;cursor:pointer}
 .hdr.home-header{margin:12px 12px 0;padding:24px 18px 30px;border:1px solid rgba(255,255,255,.55);border-radius:24px;background:linear-gradient(150deg,#A6E3E9,#CBF1F5);transition:transform .3s ease,opacity .3s ease}
 .hdr.home-header.collapsed{transform:translateY(calc(-100% - 16px));opacity:0;pointer-events:none}
 .home-overlap{margin-left:12px;margin-right:12px}
-.home-screen .hdr.home-header{margin:0;border-radius:0 0 24px 24px;padding:calc(24px + env(safe-area-inset-top,0px)) 12px 30px}
+.home-screen .hdr.home-header{margin:0;border-radius:24px;padding:calc(24px + env(safe-area-inset-top,0px)) 12px 30px}
 .home-screen .home-overlap{margin-left:0;margin-right:0}
 .home-screen .pad{padding-left:10px;padding-right:10px}
 .home-screen .card{padding:12px}
@@ -1460,7 +1460,7 @@ function viewHome(){
   const homeList=DATA.islands
   S.homeList=homeList.map(x=>x.id)
   return `<div class="screen home-screen">
-    <div class="hdr home-header" id="homeHeader" style="padding-bottom:96px">${hdrDeco()}<div class="content">
+    <div class="hdr home-header" id="homeHeader" style="padding-bottom:80px">${hdrDeco()}<div class="content">
       <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:12px">
         <div><p class="hdr-eyebrow">ISLAND HOP / 跳岛</p><p class="hdr-greeting">嗨，${esc(S.profile.nickname)} · 探索第 ${S.profile.islandDays} 天</p></div>
         <button class="pill glasspill" data-action="location" title="修改定位">${ICON.pin} ${esc(S.location.split(' · ').slice(0,2).join(' · '))} ${ICON.chev}</button>
@@ -1473,7 +1473,7 @@ function viewHome(){
         <span class="go">›</span>
       </button>
     </div></div>
-    <div class="pad overlap home-overlap" style="margin-top:-24px">
+    <div class="pad overlap home-overlap" style="margin-top:-48px">
       ${(()=>{
         const pending=S.bookings.filter(b=>b.status==='booked')
         if(!pending.length)return ''
