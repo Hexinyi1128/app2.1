@@ -566,15 +566,11 @@ const DIARY_OPTIONS={
 }
 function diaryOptions(){return DIARY_OPTIONS[S.selectedIslandId]||DIARY_OPTIONS.coffee}
 function cloneFeedbackDraft(d){return {...d,fun:[...(d.fun||[])],hard:[...(d.hard||[])],feelings:(d.feelings||[]).map(x=>({...x}))}}
-function feedbackDraftFromRecord(rec){
-  const opts=DIARY_OPTIONS[(rec&&rec.islandId)||'coffee']||DIARY_OPTIONS.coffee
-  const labels=(rec&&rec.summary)||{}
-  const ids=(list,names)=>list.filter(([id,label])=>(names||[]).includes(label)).map(([id])=>id)
+function feedbackDraftFromRecord(){
   return {
-    fun:ids(opts.fun,labels.fun),hard:ids(opts.hard,labels.hard),
-    excitement:labels.excitement||5,
-    feelings:DATA.diary.feelings.map(f=>({...f,on:(labels.feelings||[]).some(t=>t.includes(f.short))})),
-    discovery:labels.discovery||'',funOther:'',hardOther:'',rating:(rec&&rec.rating)||0
+    fun:[],hard:[],excitement:5,
+    feelings:DATA.diary.feelings.map(f=>({...f,on:false})),
+    discovery:'',funOther:'',hardOther:'',rating:0
   }
 }
 
