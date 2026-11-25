@@ -16,8 +16,8 @@ body{margin:0;background:#E3FDFD;color:var(--ink);font-family:-apple-system,Blin
 button,input,textarea{font:inherit}
 button{color:inherit;-webkit-appearance:none;appearance:none;cursor:pointer}
 ::selection{background:rgba(113,201,206,.28);color:inherit}
-#app{position:relative;width:100%;max-width:375px;min-height:100vh;min-height:100dvh;margin:0 auto;overflow:hidden;background:var(--page)}
-@media(min-width:640px){#app{margin:20px auto;min-height:calc(100dvh - 40px);border-radius:30px;box-shadow:0 24px 60px rgba(34,84,90,.16)}}
+#app{position:relative;width:100%;max-width:100%;min-height:100vh;min-height:100dvh;margin:0 auto;overflow:hidden;background:var(--page)}
+@media(min-width:640px){#app{max-width:375px;margin:20px auto;min-height:calc(100dvh - 40px);border-radius:30px;box-shadow:0 24px 60px rgba(34,84,90,.16)}}
 .screen{min-height:100%;padding-bottom:100px}
 .overlap{position:relative;z-index:6;margin-left:0;margin-right:0}
 
@@ -155,8 +155,8 @@ button{color:inherit;-webkit-appearance:none;appearance:none;cursor:pointer}
 .store-review:last-of-type{border-bottom:0}
 .store-avatar{display:grid;place-items:center;width:32px;height:32px;flex:none;border-radius:50%;background:var(--mistlight);color:var(--deep);font-size:12px;font-weight:700}
 
-.nav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);z-index:40;width:100%;max-width:375px;padding:0 16px 16px;pointer-events:none}
-@media(min-width:640px){.nav{bottom:20px}}
+.nav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);z-index:40;width:100%;max-width:100%;padding:0 16px 16px;pointer-events:none}
+@media(min-width:640px){.nav{max-width:375px;bottom:20px}}
 .nav-inner{pointer-events:auto;display:flex;align-items:center;justify-content:space-between;gap:2px;width:100%;padding:6px 8px;border-radius:999px;background:rgba(255,255,255,.88);box-shadow:0 10px 28px rgba(34,84,90,.18);backdrop-filter:blur(14px)}
 .tab{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;width:52px;height:50px;flex:none;border:0;border-radius:999px;background:#fff;color:var(--muted);font-size:12px;font-weight:600}
 .tab svg{width:18px;height:18px}
@@ -189,12 +189,13 @@ button{color:inherit;-webkit-appearance:none;appearance:none;cursor:pointer}
 
 .toast{position:fixed;top:16px;left:50%;transform:translateX(-50%);z-index:60;display:flex;align-items:center;gap:10px;width:310px;padding:12px 14px;border-radius:18px;background:rgba(34,84,90,.95);color:#fff;box-shadow:0 12px 34px rgba(34,84,90,.2);font-size:12px;line-height:1.5;animation:toastIn .24s ease-out}
 @media(min-width:640px){.toast{top:36px}}
+@media(min-width:640px){.book-action-bar{max-width:375px}}
 .toast .tick{display:grid;place-items:center;width:24px;height:24px;flex:none;border-radius:50%;background:var(--okay);color:var(--ink)}
 @keyframes toastIn{from{opacity:0;transform:translate(-50%,-12px)}to{opacity:1;transform:translate(-50%,0)}}
 
 .sheet-mask{position:fixed;inset:0;z-index:50;background:rgba(34,84,90,.25);backdrop-filter:blur(2px)}
-.sheet{position:fixed;bottom:0;left:50%;transform:translateX(-50%);z-index:51;width:100%;max-width:375px;padding:20px 20px 28px;border-radius:26px 26px 0 0;background:#fff;box-shadow:0 12px 34px rgba(34,84,90,.18);animation:rise .3s ease-out}
-@media(min-width:640px){.sheet{bottom:20px;border-radius:26px}}
+.sheet{position:fixed;bottom:0;left:50%;transform:translateX(-50%);z-index:51;width:100%;max-width:100%;padding:20px 20px 28px;border-radius:26px 26px 0 0;background:#fff;box-shadow:0 12px 34px rgba(34,84,90,.18);animation:rise .3s ease-out}
+@media(min-width:640px){.sheet{max-width:375px;bottom:20px;border-radius:26px}}
 @keyframes rise{from{opacity:0;transform:translate(-50%,10px)}to{opacity:1;transform:translate(-50%,0)}}
 .sheet .handle{width:40px;height:4px;margin:0 auto 18px;border-radius:99px;background:var(--line)}
 .sheet-item{display:flex;align-items:center;justify-content:space-between;width:100%;padding:14px 16px;margin-top:10px;border:0;border-radius:18px;background:var(--page);text-align:left}
@@ -1659,7 +1660,7 @@ function viewDetail(){
       </div></div>
       <p style="text-align:center;font-size:10px;color:var(--muted);margin-top:24px">登岛不是承诺，只是一段真实的时间。</p>
     </div>
-    <div style="position:fixed;bottom:0;left:50%;transform:translateX(-50%);z-index:30;display:flex;align-items:center;gap:12px;width:100%;max-width:375px;padding:12px 20px;border-top:1px solid var(--line);background:rgba(255,255,255,.95);backdrop-filter:blur(10px)">
+    <div class="book-action-bar" style="position:fixed;bottom:0;left:50%;transform:translateX(-50%);z-index:30;display:flex;align-items:center;gap:12px;width:100%;padding:12px 20px;border-top:1px solid var(--line);background:rgba(255,255,255,.95);backdrop-filter:blur(10px)">
       <div style="flex:none"><p style="margin:0;font-size:10px;color:var(--muted)">${bd.year}年${bd.month}月${bd.day}日 · ${lv.duration}</p><p style="margin:2px 0 0;font-size:19px;font-weight:800;line-height:1.1">¥${levelPrice(i.id,lv.id)}</p></div>
       ${btn('确认预约 · 登岛','book')}
     </div>
