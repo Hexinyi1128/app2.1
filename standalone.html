@@ -734,7 +734,7 @@ const S = {
   mapPan:{x:0,y:0},storeMapPan:{x:0,y:0},mapZoom:1,mapHeadCollapsed:false,storesHidden:false,mapFullscreen:false,payMethod:'wechat',
   geo:{lat:31.224,lng:121.445},mapCenter:{lat:31.224,lng:121.445},autoLocation:true,
   reviewTab:'all',reviewLimit:6,likedReviews:[],avatarLook:null,
-  feedbackDraftId:null,feedbackDrafts:{}
+  feedbackDraftId:null,feedbackDrafts:{},feedbackDoneIds:{}
 }
 const app = document.getElementById('app')
 let toastTimer=null, timerId=null, upcomingTimer=null, verifyTimer=null
@@ -1541,12 +1541,18 @@ function viewHome(){
         const pending=S.bookings.filter(b=>b.status==='booked')
         if(!pending.length)return ''
         const bookedIds=new Set(pending.map(b=>b.islandId))
-        const fbRec=S.records.find(r=>r.status==='watching'&&!bookedIds.has(r.islandId))
-          ||S.records.find(r=>!bookedIds.has(r.islandId)&&findIsland(r.islandId))
-          ||DATA.islands.find(x=>!bookedIds.has(x.id))
-          ||DATA.islands[0]
-        const fbIsland=findIsland(fbRec.islandId)||fbRec
-        const fbLevel=DATA.levels.find(x=>x.name===fbRec.level)||DATA.levels[0]
+        const doneFeedback=new Set(Object.keys(S.feedbackDoneIds||{}).filter(id=>S.feedbackDoneIds[id]))
+        const fbRec=doneFeedback.size?null:S.records.find(r=>r.status==='watching'&&!bookedIds.has(r.islandId)&&!doneFeedback.has(r.islandId))
+          ||S.records.find(r=>!bookedIds.has(r.islandId)&&!doneFeedback.has(r.islandId)&&findIsland(r.islandId))
+          ||DATA.islands.find(x=>!bookedIds.has(x.id)&&!doneFeedback.has(x.id))
+          ||null
+        const fbIsland=fbRec?(findIsland(fbRec.islandId)||fbRec):null
+        const fbLevel=fbRec?(DATA.levels.find(x=>x.name===fbRec.level)||DATA.levels[0]):null
+        const feedbackRow=fbIsland?`<div style="display:flex;align-items:center;gap:10px;margin-top:10px;padding:12px;border-radius:16px;background:rgba(255,255,255,.82)">
+            <span style="color:var(--primary)">${ICON.journal}</span>
+            <b style="flex:1;min-width:0;font-size:12px">你有一条${fbIsland.name}的未完成反馈</b>
+            <button class="go-feedback" data-action="go-feedback" data-id="${fbIsland.id}" data-level="${fbLevel.id}" style="flex:none;padding:8px 12px;border:0;border-radius:99px;background:var(--deep);color:#fff;font-size:10px;font-weight:700">点击去反馈</button>
+          </div>`:''
         return `<div class="card" style="padding:18px 20px;margin-bottom:14px;background:linear-gradient(135deg,#71C9CE,#A6E3E9)">
           <div class="upcoming-head" style="display:flex;align-items:center;justify-content:space-between"><p style="margin:0;font-size:12px;font-weight:700;letter-spacing:.16em;color:#fff">UPCOMING · 待完成</p>${pill(pending.length+' 条预约')}</div>
           <div style="display:grid;gap:10px;margin-top:14px">${pending.map(b=>{
@@ -1566,11 +1572,7 @@ function viewHome(){
               </div>
             </div>`
           }).join('')}</div>
-          <div style="display:flex;align-items:center;gap:10px;margin-top:10px;padding:12px;border-radius:16px;background:rgba(255,255,255,.82)">
-            <span style="color:var(--primary)">${ICON.journal}</span>
-            <b style="flex:1;min-width:0;font-size:12px">你有一条${fbIsland.name}的未完成反馈</b>
-            <button class="go-feedback" data-action="go-feedback" data-id="${fbIsland.id}" data-level="${fbLevel.id}" style="flex:none;padding:8px 12px;border:0;border-radius:99px;background:var(--deep);color:#fff;font-size:10px;font-weight:700">点击去反馈</button>
-          </div>
+          ${feedbackRow}
           <button data-action="nav-bookings" style="display:block;margin:12px auto 0;border:0;background:none;color:var(--primary);font-size:10px;font-weight:700">查看我的预约 →</button>
         </div>`
       })()}
@@ -2443,6 +2445,11 @@ function submitDiary(){
   else if(d.rating&&d.rating<=2)S.insight+=` 你只给「${i.name}」打了 ${d.rating} 分，这类职业暂时可以往后放一放。`
   const doneBooking=S.bookings.find(x=>x.id===S.activeBookingId)
   if(doneBooking)doneBooking.status='completed'
+  if(S.feedbackDraftId){
+    S.feedbackDoneIds[S.feedbackDraftId]=true
+    delete S.feedbackDrafts[S.feedbackDraftId]
+    S.feedbackDraftId=null
+  }
   showToast('体验日记已收进跳岛日志')
   navigate('result')
 }
