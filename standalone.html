@@ -1493,7 +1493,7 @@ function viewHome(){
               <div style="display:flex;align-items:center;gap:10px">
                 ${ring(bi.glyph,38)}
                 <div style="flex:1;min-width:0"><div style="display:flex;align-items:center;justify-content:space-between;gap:6px"><b style="font-size:12px">${bi.name}</b>${pill('已锁定','green')}</div><p style="margin:3px 0 0;font-size:10px;color:var(--muted)">${bookingDate(b)} · ${bl.name} · 到店 ${arrivalTime(bst.id)}</p></div>
-                <button data-action="reminder-start" data-id="${b.id}" style="flex:none;padding:8px 12px;border:0;border-radius:99px;background:var(--primary);color:#fff;font-size:10px;font-weight:700">开始体验</button>
+                <button data-action="reminder-start" data-id="${b.id}" style="flex:none;padding:8px 12px;border:0;border-radius:99px;background:var(--primary);color:#fff;font-size:10px;font-weight:700">待体验</button>
               </div>
               <div style="display:flex;align-items:center;gap:8px;margin-top:10px;padding:10px 14px;border-radius:14px;${cd.soon?'background:linear-gradient(135deg,rgba(95,185,191,.18),rgba(166,227,233,.12));border:1px solid rgba(95,185,191,.4)':'background:var(--mistlight)'}">
                 <span style="color:${cd.soon?'#B05D56':'var(--primary)'}">${ICON.clock}</span>
