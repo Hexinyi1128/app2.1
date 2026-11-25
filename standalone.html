@@ -2443,9 +2443,10 @@ function submitDiary(){
   else S.insight=`「${i.name}」这座岛，你登过了，也决定不留下。排除不是失败——它让你知道，比起重复和独自精细处理，你更在意交流、动手和看得见的反馈。下一次可以挑一座节奏不同的岛。`
   if(d.rating>=4)S.insight+=` 你还给「${i.name}」打了 ${d.rating} 分，这类职业目前在你的偏好里排得比较靠前。`
   else if(d.rating&&d.rating<=2)S.insight+=` 你只给「${i.name}」打了 ${d.rating} 分，这类职业暂时可以往后放一放。`
-  const doneBooking=S.bookings.find(x=>x.id===S.activeBookingId)
+  const isFeedback=!!S.feedbackDraftId
+  const doneBooking=isFeedback?null:S.bookings.find(x=>x.id===S.activeBookingId)
   if(doneBooking)doneBooking.status='completed'
-  if(S.feedbackDraftId){
+  if(isFeedback){
     S.feedbackDoneIds[S.feedbackDraftId]=true
     delete S.feedbackDrafts[S.feedbackDraftId]
     S.feedbackDraftId=null
