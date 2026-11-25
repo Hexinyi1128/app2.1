@@ -937,6 +937,19 @@ function recommendations(){
 }
 
 function fmtTime(sec){return [Math.floor(sec/3600),Math.floor(sec%3600/60),sec%60].map(n=>String(n).padStart(2,'0')).join(':')}
+function qrSvg(seed){
+  const n=25,c=4,pad=8,size=n*c+pad*2
+  let h=0;for(const ch of String(seed))h=(h*31+ch.charCodeAt(0))>>>0
+  const rnd=()=>{h=(h*1664525+1013904223)>>>0;return h/4294967296}
+  const rect=(x,y)=>`<rect x="${x*c+pad}" y="${y*c+pad}" width="${c}" height="${c}" fill="#22545A"/>`
+  const finder=(ox,oy)=>{let s='';for(let y=0;y<7;y++)for(let x=0;x<7;x++){const on=x===0||x===6||y===0||y===6||(x>=2&&x<=4&&y>=2&&y<=4);if(on)s+=rect(ox+x,oy+y)}return s}
+  let cells=''
+  for(let y=0;y<n;y++)for(let x=0;x<n;x++){
+    if((x<8&&y<8)||(x>=n-8&&y<8)||(x<8&&y>=n-8))continue
+    if(rnd()>.55)cells+=rect(x,y)
+  }
+  return `<svg viewBox="0 0 ${size} ${size}" style="width:168px;height:168px;display:block" aria-label="到店核销二维码">${cells}${finder(0,0)}${finder(n-7,0)}${finder(0,n-7)}</svg>`
+}
 function durationSeconds(levelId){
   const d=(findLevel(levelId)||DATA.levels[1]).duration
   return d==='半天'?4*3600:d==='两天'?16*3600:8*3600
@@ -1765,10 +1778,9 @@ function viewExperience(){
   return `<div class="screen">
     <div class="hdr" style="padding-bottom:64px">${hdrDeco()}<div class="content">
       ${backBar(pill('导师带练中','glasspill'))}
-      <div style="display:flex;align-items:center;gap:8px;margin-top:16px"><span style="width:8px;height:8px;border-radius:50%;background:var(--okay);box-shadow:0 0 0 4px rgba(168,208,141,.35)"></span><span style="font-size:11px;font-weight:600;color:var(--deep)">体验进行中</span></div>
+      <div style="display:flex;align-items:center;gap:8px;margin-top:16px"><span style="width:8px;height:8px;border-radius:50%;background:var(--okay);box-shadow:0 0 0 4px rgba(168,208,141,.35)"></span><span style="font-size:11px;font-weight:600;color:var(--deep)">待体验</span></div>
       <h1 style="margin:12px 0 0;font-size:27px;letter-spacing:-.6px">登岛：${i.name}</h1>
       <p style="margin:8px 0 0;font-size:12px;color:rgba(113,201,206,.85)">${lv.name} · ${lv.duration} · 不用急，跟着导师走。</p>
-      <div class="glass-strong" style="display:inline-flex;align-items:center;gap:8px;margin-top:20px;padding:8px 16px;border-radius:99px"><span style="color:var(--deep)">${ICON.clock}</span><span style="font-size:10px;color:rgba(113,201,206,.85)">剩余</span><span id="timer" style="font-size:15px;font-weight:700;letter-spacing:.5px;font-variant-numeric:tabular-nums">${fmtTime(S.elapsed)}</span></div>
     </div></div>
     <div class="pad overlap" style="margin-top:-28px">
       <div class="card" style="margin-top:16px;padding:20px;border:1px solid rgba(198,216,234,.6);background:rgba(234,241,248,.6);box-shadow:none">
@@ -1776,10 +1788,16 @@ function viewExperience(){
         <p style="margin:8px 0 0;font-size:13px;line-height:1.8;color:var(--deep)">“不用急着做得好，先注意自己哪一刻注意力最集中。”</p>
         <p style="margin:8px 0 0;font-size:10px;color:var(--muted)">— 今天的带练导师</p>
       </div>
+      <div class="card" style="padding:20px;margin-top:16px;text-align:center">
+        <p style="margin:0;font-size:10px;font-weight:700;letter-spacing:.16em;color:var(--primary)">VERIFY CODE</p>
+        <p style="margin:8px 0 0;font-size:13px;font-weight:700">到店核销码</p>
+        <div style="width:max-content;margin:16px auto;padding:12px;border:1px solid var(--line);border-radius:18px;background:#fff">${qrSvg(i.id+'-'+S.bookingDate.year+S.bookingDate.month+S.bookingDate.day)}</div>
+        <div style="display:inline-block;padding:6px 14px;border-radius:99px;background:var(--mist);color:var(--deep);font-size:11px;font-weight:700">待使用</div>
+        <div style="margin-top:16px">${btn('核销二维码 · 写体验日记','verify-qr','deep')}</div>
+      </div>
       <div style="margin-top:24px"><h2 style="margin:0;font-size:16px">此刻感觉如何？</h2><p style="margin:4px 0 0;font-size:11px;color:var(--muted)">随手记一下，等下写日记时用得上。</p>
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px">${DATA.moods.map(([id,label])=>`<button data-action="mood" data-id="${id}" style="padding:14px;border-radius:18px;border:1px solid ${S.mood===id?'var(--deep)':'var(--line)'};background:${S.mood===id?'var(--deep)':'#fff'};color:${S.mood===id?'#fff':'var(--ink)'};font-size:12px;font-weight:600">${label}</button>`).join('')}</div>
       </div>
-      <div style="margin-top:28px">${btn('完成体验，写日记','finish-experience','dark')}</div>
     </div>
   </div>`
 }
@@ -1796,12 +1814,12 @@ function viewDiary(){
       <p style="margin:8px 0 0;font-size:12px;line-height:1.7;color:rgba(113,201,206,.85)">这次不是评价商家，是记下你自己的感受。<br>${findIsland(S.selectedIslandId).name} · 今天</p>
     </div></div>
     <div class="pad" style="padding-top:20px;display:grid;gap:14px">
-      <div class="card" style="padding:20px"><p style="margin:0;font-size:12px;font-weight:700">01 · 哪个环节最有意思？<span style="font-weight:400;color:var(--muted)"> 可多选</span></p><div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:16px">${opts.fun.map(([id,label])=>`<button class="chip ${d.fun.includes(id)?'on':''}" data-action="diary-chip" data-group="fun" data-id="${id}">${label}</button>`).join('')}</div>${d.fun.includes('f_other')?`<input data-field="funOther" maxlength="24" value="${esc(d.funOther)}" placeholder="写出你觉得有意思的环节" style="width:100%;margin-top:10px;padding:12px 14px;border:1px solid var(--line);border-radius:14px;background:var(--page);font-size:12px;color:var(--ink);outline:none">`:''}</div>
-      <div class="card" style="padding:20px"><p style="margin:0;font-size:12px;font-weight:700">02 · 哪个环节最困难？<span style="font-weight:400;color:var(--muted)"> 可多选</span></p><div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:16px">${opts.hard.map(([id,label])=>`<button class="chip hard ${d.hard.includes(id)?'on':''}" data-action="diary-chip" data-group="hard" data-id="${id}">${label}</button>`).join('')}</div>${d.hard.includes('h_other')?`<input data-field="hardOther" maxlength="24" value="${esc(d.hardOther)}" placeholder="写出你觉得困难的环节" style="width:100%;margin-top:10px;padding:12px 14px;border:1px solid var(--line);border-radius:14px;background:var(--page);font-size:12px;color:var(--ink);outline:none">`:''}<p class="smallnote" style="margin-top:12px">困难不是扣分，它只是告诉你这座岛哪块石头硌脚。</p></div>
-      <div class="card" style="padding:20px"><div style="display:flex;align-items:baseline;justify-content:space-between"><p style="margin:0;font-size:12px;font-weight:700">03 · 此刻的兴奋程度</p><p style="margin:0"><b id="exciteVal" style="font-size:13px;color:var(--deep)">${d.excitement}</b><span style="font-size:10px;color:var(--muted)"> / 10</span></p></div><input class="slider" type="range" min="1" max="10" value="${d.excitement}" data-field="excitement" style="--p:${(d.excitement-1)/9*100}%;margin-top:20px"><div style="display:flex;justify-content:space-between;margin-top:12px;font-size:10px;color:var(--muted)"><span>平静</span><span id="exciteLabel" style="color:var(--primary)">${exciteText}</span><span>兴奋</span></div></div>
-      <div class="card" style="padding:20px"><p style="margin:0;font-size:12px;font-weight:700">04 · 这些感受像你吗？</p><div style="display:grid;gap:10px;margin-top:16px">${d.feelings.map(f=>`<button class="switchrow" data-action="feeling" data-id="${f.id}"><span>${f.label}</span><span class="sw ${f.on?'on':''} ${f.tone==='negative'?'neg':''}"></span></button>`).join('')}</div></div>
-      <div class="card" style="padding:20px"><p style="margin:0;font-size:12px;font-weight:700">05 · 有没有一点意外发现？</p><textarea class="field" data-field="discovery" rows="4" maxlength="160" placeholder="比如：我以为自己会不喜欢和陌生人说话，结果那一段最有意思……">${esc(d.discovery)}</textarea><p style="margin:8px 0 0;text-align:right;font-size:10px;color:var(--muted)"><span id="discCount">${d.discovery.length}</span> / 160</p></div>
-      <div class="card" style="padding:20px"><p style="margin:0;font-size:12px;font-weight:700">06 · 给这次体验打个分？<span style="font-weight:400;color:var(--muted)"> 会计入职业偏好</span></p><div style="display:flex;align-items:center;gap:4px;margin-top:14px">${[1,2,3,4,5].map(n=>`<button class="star ${d.rating>=n?'on':''}" data-action="rating" data-score="${n}" aria-label="${n} 分">★</button>`).join('')}<span style="margin-left:10px;font-size:11px;font-weight:600;color:var(--primary)">${ratingText}</span></div><p class="smallnote" style="margin-top:12px">分数只用来看你和这类职业的契合度，不是给别人看的能力评分。</p></div>
+      <div class="card" style="padding:20px"><p style="margin:0;font-size:12px;font-weight:700">01 · 给这次体验打个分？<span style="font-weight:400;color:var(--muted)"> 会计入职业偏好</span></p><div style="display:flex;align-items:center;gap:4px;margin-top:14px">${[1,2,3,4,5].map(n=>`<button class="star ${d.rating>=n?'on':''}" data-action="rating" data-score="${n}" aria-label="${n} 分">★</button>`).join('')}<span style="margin-left:10px;font-size:11px;font-weight:600;color:var(--primary)">${ratingText}</span></div><p class="smallnote" style="margin-top:12px">分数只用来看你和这类职业的契合度，不是给别人看的能力评分。</p></div>
+      <div class="card" style="padding:20px"><p style="margin:0;font-size:12px;font-weight:700">02 · 哪个环节最有意思？<span style="font-weight:400;color:var(--muted)"> 可多选</span></p><div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:16px">${opts.fun.map(([id,label])=>`<button class="chip ${d.fun.includes(id)?'on':''}" data-action="diary-chip" data-group="fun" data-id="${id}">${label}</button>`).join('')}</div>${d.fun.includes('f_other')?`<input data-field="funOther" maxlength="24" value="${esc(d.funOther)}" placeholder="写出你觉得有意思的环节" style="width:100%;margin-top:10px;padding:12px 14px;border:1px solid var(--line);border-radius:14px;background:var(--page);font-size:12px;color:var(--ink);outline:none">`:''}</div>
+      <div class="card" style="padding:20px"><p style="margin:0;font-size:12px;font-weight:700">03 · 哪个环节最困难？<span style="font-weight:400;color:var(--muted)"> 可多选</span></p><div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:16px">${opts.hard.map(([id,label])=>`<button class="chip hard ${d.hard.includes(id)?'on':''}" data-action="diary-chip" data-group="hard" data-id="${id}">${label}</button>`).join('')}</div>${d.hard.includes('h_other')?`<input data-field="hardOther" maxlength="24" value="${esc(d.hardOther)}" placeholder="写出你觉得困难的环节" style="width:100%;margin-top:10px;padding:12px 14px;border:1px solid var(--line);border-radius:14px;background:var(--page);font-size:12px;color:var(--ink);outline:none">`:''}<p class="smallnote" style="margin-top:12px">困难不是扣分，它只是告诉你这座岛哪块石头硌脚。</p></div>
+      <div class="card" style="padding:20px"><div style="display:flex;align-items:baseline;justify-content:space-between"><p style="margin:0;font-size:12px;font-weight:700">04 · 此刻的兴奋程度</p><p style="margin:0"><b id="exciteVal" style="font-size:13px;color:var(--deep)">${d.excitement}</b><span style="font-size:10px;color:var(--muted)"> / 10</span></p></div><input class="slider" type="range" min="1" max="10" value="${d.excitement}" data-field="excitement" style="--p:${(d.excitement-1)/9*100}%;margin-top:20px"><div style="display:flex;justify-content:space-between;margin-top:12px;font-size:10px;color:var(--muted)"><span>平静</span><span id="exciteLabel" style="color:var(--primary)">${exciteText}</span><span>兴奋</span></div></div>
+      <div class="card" style="padding:20px"><p style="margin:0;font-size:12px;font-weight:700">05 · 这些感受像你吗？</p><div style="display:grid;gap:10px;margin-top:16px">${d.feelings.map(f=>`<button class="switchrow" data-action="feeling" data-id="${f.id}"><span>${f.label}</span><span class="sw ${f.on?'on':''} ${f.tone==='negative'?'neg':''}"></span></button>`).join('')}</div></div>
+      <div class="card" style="padding:20px"><p style="margin:0;font-size:12px;font-weight:700">06 · 有没有一点意外发现？</p><textarea class="field" data-field="discovery" rows="4" maxlength="160" placeholder="比如：我以为自己会不喜欢和陌生人说话，结果那一段最有意思……">${esc(d.discovery)}</textarea><p style="margin:8px 0 0;text-align:right;font-size:10px;color:var(--muted)"><span id="discCount">${d.discovery.length}</span> / 160</p></div>
       <div>${btn('生成我的探索记录','diary-submit')}<p class="smallnote" style="text-align:center;margin-top:12px">没有标准答案，这只是你给自己的一个观察位置。</p></div>
     </div>
   </div>`
@@ -2219,7 +2237,6 @@ let lastRenderedScreen=null
 const scrollMemo={}
 let pendingScrollRestore=null
 function render(){
-  if(timerId&&S.screen!=='experience'){clearInterval(timerId);timerId=null}
   if(upcomingTimer){clearInterval(upcomingTimer);upcomingTimer=null}
   const screenChanged=lastRenderedScreen!==S.screen
   if(screenChanged){
@@ -2266,9 +2283,6 @@ function bindDynamic(){
       last=idx
       document.querySelectorAll('#heroGalleryDots button').forEach((el,n)=>el.classList.toggle('on',n===idx))
     },{passive:true})
-  }
-  if(S.screen==='experience'&&!timerId){
-    timerId=setInterval(()=>{if(S.elapsed>0)S.elapsed--;const el=document.getElementById('timer');if(el)el.textContent=fmtTime(S.elapsed)},1000)
   }
   if(S.screen==='map')applyMapFilter()
 }
@@ -2562,7 +2576,7 @@ app.addEventListener('click',e=>{
       S.tasksDone=S.tasksDone.includes(id)?S.tasksDone.filter(x=>x!==id):[...S.tasksDone,id];render();break
     }
     case 'mood':S.mood=el.dataset.id;render();break
-    case 'finish-experience':navigate('diary');break
+    case 'finish-experience':case 'verify-qr':navigate('diary');break
     case 'diary-chip':{
       const g=el.dataset.group,id=el.dataset.id
       S.diary[g]=S.diary[g].includes(id)?S.diary[g].filter(x=>x!==id):[...S.diary[g],id]
