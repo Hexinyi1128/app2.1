@@ -1050,10 +1050,7 @@ function updateSectionHead(){
   const uh=document.getElementById('unlockHead');if(uh)uh.classList.toggle('collapsed',unlockOff)
   const um=document.getElementById('unlockHeadMini');if(um)um.classList.toggle('show',unlockOff)
 }
-function locFabHtml(){
-  if(['onboarding','allReviews','storeMap'].includes(S.screen))return ''
-  return `<div class="loc-wrap"><button class="loc-fab" data-action="locate" aria-label="定位" title="定位">${ICON.locate}</button></div>`
-}
+function locFabHtml(){return ''}
 function miniHeaderHtml(){
   if(S.screen!=='home')return ''
   return `<div id="headerMini" class="header-mini">
