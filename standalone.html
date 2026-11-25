@@ -96,6 +96,7 @@ button{color:inherit;-webkit-appearance:none;appearance:none;cursor:pointer}
 .btn.compact .arrow svg{width:12px;height:12px}
 
 .pill{display:inline-flex;align-items:center;gap:5px;flex:none;padding:6px 11px;border-radius:999px;font-size:11px;font-weight:600;line-height:1;border:0;white-space:nowrap}
+.upcoming-head .pill{font-size:12px}
 .pill.default{background:var(--mistlight);color:var(--deep)}
 .pill.mist{background:rgba(198,216,234,.7);color:var(--deep)}
 .pill.dark{background:var(--ink);color:#fff}
@@ -1483,7 +1484,7 @@ function viewHome(){
         const pending=S.bookings.filter(b=>b.status==='booked')
         if(!pending.length)return ''
         return `<div class="card" style="padding:18px 20px;margin-bottom:14px;background:linear-gradient(135deg,#71C9CE,#A6E3E9)">
-          <div style="display:flex;align-items:center;justify-content:space-between"><p style="margin:0;font-size:10px;font-weight:700;letter-spacing:.16em;color:#fff">UPCOMING · 待体验</p>${pill(pending.length+' 条预约')}</div>
+          <div class="upcoming-head" style="display:flex;align-items:center;justify-content:space-between"><p style="margin:0;font-size:12px;font-weight:700;letter-spacing:.16em;color:#fff">UPCOMING · 待体验</p>${pill(pending.length+' 条预约')}</div>
           <div style="display:grid;gap:10px;margin-top:14px">${pending.map(b=>{
             const bi=findIsland(b.islandId),bl=findLevel(b.levelId)
             const bst=findStore(b.storeId)||DATA.stores.find(x=>x.islandId===b.islandId)||DATA.stores[0]
