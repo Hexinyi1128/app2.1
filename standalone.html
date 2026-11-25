@@ -565,6 +565,18 @@ const DIARY_OPTIONS={
   }
 }
 function diaryOptions(){return DIARY_OPTIONS[S.selectedIslandId]||DIARY_OPTIONS.coffee}
+function cloneFeedbackDraft(d){return {...d,fun:[...(d.fun||[])],hard:[...(d.hard||[])],feelings:(d.feelings||[]).map(x=>({...x}))}}
+function feedbackDraftFromRecord(rec){
+  const opts=DIARY_OPTIONS[(rec&&rec.islandId)||'coffee']||DIARY_OPTIONS.coffee
+  const labels=(rec&&rec.summary)||{}
+  const ids=(list,names)=>list.filter(([id,label])=>(names||[]).includes(label)).map(([id])=>id)
+  return {
+    fun:ids(opts.fun,labels.fun),hard:ids(opts.hard,labels.hard),
+    excitement:labels.excitement||5,
+    feelings:DATA.diary.feelings.map(f=>({...f,on:(labels.feelings||[]).some(t=>t.includes(f.short))})),
+    discovery:labels.discovery||'',funOther:'',hardOther:'',rating:(rec&&rec.rating)||0
+  }
+}
 
 const REVIEW_NAMES = ['小满','阿屿','林同学','橙子汽水','Mia','周末登岛人','阿澈','七七','南风','芮芮','一只鹿','Lynn','小岛民','慢慢','桃子']
 const REVIEW_TEXTS = [
@@ -725,7 +737,8 @@ const S = {
   bookings:[],bookingDate:(()=>{const d=new Date(Date.now()+8*3600*1000);return {year:d.getUTCFullYear(),month:d.getUTCMonth()+1,day:d.getUTCDate()}})(),upcomingNotified:false,activeBookingId:null,loggedIn:false,
   mapPan:{x:0,y:0},storeMapPan:{x:0,y:0},mapZoom:1,mapHeadCollapsed:false,storesHidden:false,mapFullscreen:false,payMethod:'wechat',
   geo:{lat:31.224,lng:121.445},mapCenter:{lat:31.224,lng:121.445},autoLocation:true,
-  reviewTab:'all',reviewLimit:6,likedReviews:[],avatarLook:null
+  reviewTab:'all',reviewLimit:6,likedReviews:[],avatarLook:null,
+  feedbackDraftId:null,feedbackDrafts:{}
 }
 const app = document.getElementById('app')
 let toastTimer=null, timerId=null, upcomingTimer=null, verifyTimer=null
@@ -1531,6 +1544,13 @@ function viewHome(){
       ${(()=>{
         const pending=S.bookings.filter(b=>b.status==='booked')
         if(!pending.length)return ''
+        const bookedIds=new Set(pending.map(b=>b.islandId))
+        const fbRec=S.records.find(r=>r.status==='watching'&&!bookedIds.has(r.islandId))
+          ||S.records.find(r=>!bookedIds.has(r.islandId)&&findIsland(r.islandId))
+          ||DATA.islands.find(x=>!bookedIds.has(x.id))
+          ||DATA.islands[0]
+        const fbIsland=findIsland(fbRec.islandId)||fbRec
+        const fbLevel=DATA.levels.find(x=>x.name===fbRec.level)||DATA.levels[0]
         return `<div class="card" style="padding:18px 20px;margin-bottom:14px;background:linear-gradient(135deg,#71C9CE,#A6E3E9)">
           <div class="upcoming-head" style="display:flex;align-items:center;justify-content:space-between"><p style="margin:0;font-size:12px;font-weight:700;letter-spacing:.16em;color:#fff">UPCOMING · 待完成</p>${pill(pending.length+' 条预约')}</div>
           <div style="display:grid;gap:10px;margin-top:14px">${pending.map(b=>{
@@ -1552,8 +1572,8 @@ function viewHome(){
           }).join('')}</div>
           <div style="display:flex;align-items:center;gap:10px;margin-top:10px;padding:12px;border-radius:16px;background:rgba(255,255,255,.82)">
             <span style="color:var(--primary)">${ICON.journal}</span>
-            <b style="flex:1;min-width:0;font-size:12px">你有一条未完成的反馈</b>
-            <button data-action="go-feedback" style="flex:none;padding:8px 12px;border:0;border-radius:99px;background:var(--deep);color:#fff;font-size:10px;font-weight:700">点击去反馈</button>
+            <b style="flex:1;min-width:0;font-size:12px">你有一条${fbIsland.name}的未完成反馈</b>
+            <button class="go-feedback" data-action="go-feedback" data-id="${fbIsland.id}" data-level="${fbLevel.id}" style="flex:none;padding:8px 12px;border:0;border-radius:99px;background:var(--deep);color:#fff;font-size:10px;font-weight:700">点击去反馈</button>
           </div>
           <button data-action="nav-bookings" style="display:block;margin:12px auto 0;border:0;background:none;color:var(--primary);font-size:10px;font-weight:700">查看我的预约 →</button>
         </div>`
@@ -2377,8 +2397,9 @@ function showToast(msg){
   clearTimeout(toastTimer)
   toastTimer=setTimeout(()=>{S.toast='';const node=document.getElementById('toastEl');if(node)node.remove()},2400)
 }
-function navigate(next){if(S.screen!==next)S.stack.push(S.screen);S.screen=next;render()}
-function goBack(){const target=S.stack.pop()||'home';pendingScrollRestore=scrollMemo[target]||0;S.screen=target;render()}
+function saveFeedbackDraft(){if(S.screen==='diary'&&S.feedbackDraftId)S.feedbackDrafts[S.feedbackDraftId]=cloneFeedbackDraft(S.diary)}
+function navigate(next){saveFeedbackDraft();if(S.screen!==next)S.stack.push(S.screen);S.screen=next;render()}
+function goBack(){saveFeedbackDraft();const target=S.stack.pop()||'home';pendingScrollRestore=scrollMemo[target]||0;S.screen=target;render()}
 function finishOnboarding(payload){
   if(payload){S.interests=payload.interests;S.nickname=payload.nickname||S.profile.nickname}
   S.profile={...S.profile,interests:S.interests,nickname:S.nickname||S.profile.nickname}
@@ -2634,7 +2655,14 @@ app.addEventListener('click',e=>{
     case 'booking-detail':S.activeBookingId=el.dataset.id;navigate('bookingDetail');break
     case 'start-experience':beginExperience();break
     case 'reminder-start':S.activeBookingId=el.dataset.id;beginExperience();break
-    case 'go-feedback':navigate('diary');break
+    case 'go-feedback':{
+      const id=el.dataset.id||S.selectedIslandId
+      S.selectedIslandId=id;S.levelId=el.dataset.level||S.levelId
+      S.feedbackDraftId=id
+      if(!S.feedbackDrafts[id])S.feedbackDrafts[id]=feedbackDraftFromRecord(S.records.find(r=>r.islandId===id))
+      S.diary=cloneFeedbackDraft(S.feedbackDrafts[id])
+      navigate('diary');break
+    }
     case 'cancel-booking':{
       S.bookings=S.bookings.filter(x=>x.id!==S.activeBookingId)
       S.activeBookingId=null;S.booking=S.bookings[0]||null
