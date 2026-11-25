@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>跳岛 · ISLAND HOP（可直接运行版）</title>
+<script src="https://unpkg.com/mqtt@4.3.8/dist/mqtt.min.js"></script>
 <style>
 :root{
   --primary:#71C9CE;--deep:#3E9BA2;--mist:#A6E3E9;--mistlight:#E3FDFD;
@@ -954,6 +955,35 @@ function verifyCode(){const b=S.bookingDate;return (S.selectedIslandId||'island'
 function verifyUrl(){
   const base=location.protocol==='file:'?'https://hexinyi1128.github.io/app2.1/':location.origin+location.pathname
   return base+'?verify='+encodeURIComponent(verifyCode())
+}
+let mqttClient=null,mqttTopic='',mqttHandler=null
+function mqttReady(code){
+  if(typeof mqtt==='undefined')return null
+  const topic='island-hop/app2.1/verify/'+encodeURIComponent(code)
+  if(mqttClient&&mqttTopic===topic)return mqttClient
+  if(mqttClient){try{mqttClient.end(true)}catch(e){}}
+  mqttTopic=topic
+  mqttClient=mqtt.connect('wss://broker.emqx.io:8084/mqtt',{clientId:'hop-'+Math.random().toString(16).slice(2),clean:true,reconnectPeriod:3000})
+  mqttClient.on('connect',()=>{try{mqttClient.subscribe(mqttTopic)}catch(e){}})
+  mqttClient.on('message',(t,p)=>{if(t===mqttTopic&&p.toString()==='1'&&mqttHandler)mqttHandler()})
+  return mqttClient
+}
+function mqttWatch(code,handler){
+  const c=mqttReady(code);if(!c)return
+  mqttHandler=handler
+  if(c.connected){try{c.subscribe(mqttTopic)}catch(e){}}
+}
+function mqttSend(code){
+  const c=mqttReady(code);if(!c)return
+  const pub=()=>{try{c.publish(mqttTopic,'1')}catch(e){}}
+  if(c.connected)pub();else c.once('connect',pub)
+}
+function finishVerify(code){
+  if(S.screen!=='experience')return
+  clearInterval(verifyTimer);verifyTimer=null
+  try{localStorage.removeItem('hop-verified-'+code)}catch(e){}
+  showToast('核销成功')
+  navigate('diary')
 }
 function durationSeconds(levelId){
   const d=(findLevel(levelId)||DATA.levels[1]).duration
@@ -2288,13 +2318,9 @@ function render(){
   if(S.screen==='experience'){
     const code=verifyCode()
     verifyTimer=setInterval(()=>{
-      if(localStorage.getItem('hop-verified-'+code)==='1'){
-        clearInterval(verifyTimer);verifyTimer=null
-        localStorage.removeItem('hop-verified-'+code)
-        showToast('核销成功')
-        navigate('diary')
-      }
+      try{if(localStorage.getItem('hop-verified-'+code)==='1')finishVerify(code)}catch(e){}
     },1000)
+    mqttWatch(code,()=>finishVerify(code))
   }
 }
 function bindDynamic(){
@@ -2614,7 +2640,10 @@ app.addEventListener('click',e=>{
     }
     case 'mood':S.mood=el.dataset.id;render();break
     case 'confirm-verify':
-      if(S.pendingVerify)localStorage.setItem('hop-verified-'+S.pendingVerify,'1')
+      if(S.pendingVerify){
+        try{localStorage.setItem('hop-verified-'+S.pendingVerify,'1')}catch(e){}
+        mqttSend(S.pendingVerify)
+      }
       showToast('已确认')
       break
     case 'finish-experience':case 'verify-qr':navigate('diary');break
